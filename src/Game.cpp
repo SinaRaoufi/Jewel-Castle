@@ -1,11 +1,12 @@
 #include "Game.hpp"
-#include "configs.hpp"
 
-Game::Game():mainWindow(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE)
+Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), currentState(nullptr)
 {
+    for (size_t i = 0; i < NUMBER_OF_STATES; i++)
+        statesList[i] = nullptr;
 }
 
 // initialize the game
-void Game::Init()
+void Game::init()
 {
 }
