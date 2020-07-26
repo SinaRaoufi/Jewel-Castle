@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.0)
+project(JewelCastle)
+set(CMAKE_CXX_STANDARD 11)
+add_executable(JewelCastle src/main.cpp src/Game.cpp)
+include_directories(include)
