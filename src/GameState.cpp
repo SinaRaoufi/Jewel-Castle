@@ -3,7 +3,7 @@
 
 void GameState::setBackground()
 {
-    std::string address = string(BACKGROUND_DIRECTORY) + backgroundPath;
+    std::string address = std::string(BACKGROUND_DIRECTORY) + backgroundPath;
     backgroundTexture.loadFromFile(address);
-    backgroundSprite.setTexture(backgroundTexture &);
+    backgroundSprite.setTexture(backgroundTexture);
 }
