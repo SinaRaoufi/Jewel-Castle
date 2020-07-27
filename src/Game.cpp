@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "States/MainMenuState.hpp"
 
 Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), currentState(nullptr)
 {
@@ -9,6 +10,8 @@ Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TIT
 // initialize the game
 void Game::init()
 {
+    statesList[0] = new MainMenuState();
+    currentState = statesList[0];
     run();
 }
 
