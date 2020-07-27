@@ -13,6 +13,7 @@ class Game
 public:
     Game();
     void init();
+    void run();
 
 private:
     sf::RenderWindow mainWindow;
