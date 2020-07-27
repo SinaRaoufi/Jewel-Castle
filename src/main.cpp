@@ -2,6 +2,7 @@
 
 int main()
 {
-    Init();
+    Game game;
+    game.init();
     return 0;
 }
