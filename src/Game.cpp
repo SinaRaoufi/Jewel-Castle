@@ -30,5 +30,6 @@ void Game::run()
         currentState = currentState->update(mainWindow, statesList);
         mainWindow.clear();
         currentState->render(mainWindow);
+        mainWindow.display();
     }
 }
