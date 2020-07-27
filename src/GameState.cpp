@@ -1,9 +1,11 @@
 #include "States/GameState.hpp"
 #include "configs.hpp"
 
+using namespace std;
+
 void GameState::setBackground()
 {
-    std::string address = std::string(BACKGROUND_DIRECTORY) + backgroundPath;
+    string address = string(BACKGROUND_DIRECTORY) + backgroundPath;
     backgroundTexture.loadFromFile(address);
     backgroundSprite.setTexture(backgroundTexture);
 }
