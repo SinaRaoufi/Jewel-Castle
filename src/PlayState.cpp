@@ -8,6 +8,9 @@ PlayState::PlayState()
 
 GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
 {
+    if (event.type == sf::Event::KeyPressed)
+        if (event.key.code == sf::Keyboard::Escape)
+            return state[0];
     return this;
 }
 
