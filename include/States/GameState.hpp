@@ -6,12 +6,10 @@
 #include <array>
 #include <string>
 
-typedef std::array<GameState *, NUMBER_OF_STATES> StateList;
-
 class GameState
 {
-
 public:
+    typedef std::array<GameState *, NUMBER_OF_STATES> StateList;
     enum States
     {
         MAINMENU
