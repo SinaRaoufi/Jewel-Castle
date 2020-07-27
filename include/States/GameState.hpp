@@ -6,14 +6,16 @@
 #include <array>
 #include <string>
 
+enum States
+{
+    MAINMENU,
+    PLAY
+};
+
 class GameState
 {
 public:
     typedef std::array<GameState *, NUMBER_OF_STATES> StateList;
-    enum States
-    {
-        MAINMENU
-    };
     virtual GameState *eventHandler(sf::RenderWindow &, StateList &, sf::Event &) = 0;
     virtual GameState *update(sf::RenderWindow &, StateList &) = 0;
     virtual void render(sf::RenderWindow &) = 0;

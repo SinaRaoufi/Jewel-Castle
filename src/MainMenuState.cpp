@@ -14,10 +14,10 @@ GameState *MainMenuState::eventHandler(sf::RenderWindow &window, StateList &stat
     if (event.type == sf::Event::KeyPressed)
         if (event.key.code == sf::Keyboard::Space)
         {
-            if (state[1] != nullptr)
-                delete state[1];
-            state[1] = new PlayState();
-            return state[1];
+            if (state[PLAY] != nullptr)
+                delete state[PLAY];
+            state[PLAY] = new PlayState();
+            return state[PLAY];
         }
     return this;
 }

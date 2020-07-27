@@ -10,7 +10,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
 {
     if (event.type == sf::Event::KeyPressed)
         if (event.key.code == sf::Keyboard::Escape)
-            return state[0];
+            return state[MAINMENU];
     return this;
 }
 
