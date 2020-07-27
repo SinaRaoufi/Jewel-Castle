@@ -10,6 +10,11 @@ typedef std::array<GameState *, NUMBER_OF_STATES> StateList;
 
 class GameState
 {
+    enum class States
+    {
+        MAINMENU
+    };
+
 public:
     virtual GameState *eventHandler(sf::RenderWindow &, StateList &, sf::Event &) = 0;
     virtual GameState *update(sf::RenderWindow &, StateList &) = 0;
