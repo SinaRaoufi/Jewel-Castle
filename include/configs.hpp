@@ -7,5 +7,6 @@
 
 #define NUMBER_OF_STATES 5
 #define BACKGROUND_DIRECTORY "../assets/backgrounds/" 
+#define FONT_DIRECTORY "../assets/fonts/" 
 
 #endif
