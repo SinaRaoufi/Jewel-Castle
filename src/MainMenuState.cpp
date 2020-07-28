@@ -5,7 +5,7 @@
 using namespace std;
 
 MainMenuState::MainMenuState() : playButton(100, 100, 200, 100,
-                                            FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"), "test")
+                                            FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"), "Start Game")
 {
     backgroundPath = "main_menu.png";
     setBackground();
