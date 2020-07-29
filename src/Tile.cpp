@@ -18,3 +18,15 @@ void Tile::render(sf::RenderWindow &window)
 {
     window.draw(this->tileShape);
 }
+
+bool Tile::isTileSelected(sf::Vector2f mousePoint)
+{
+    if (tileShape.getGlobalBounds().contains(mousePoint))
+        return true;
+    return false;
+}
+
+void Tile::setTileColor(sf::Color color)
+{
+    this->tileShape.setFillColor(color);
+}

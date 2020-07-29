@@ -9,6 +9,8 @@ public:
     Tile(float, float, sf::Color, sf::Color);
     void setTilePosition(float, float);
     void render(sf::RenderWindow &);
+    bool isTileSelected(sf::Vector2f);
+    void setTileColor(sf::Color);
 
 private:
     sf::RectangleShape tileShape;
