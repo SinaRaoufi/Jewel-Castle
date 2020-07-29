@@ -11,6 +11,17 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
     if (event.type == sf::Event::KeyPressed)
         if (event.key.code == sf::Keyboard::Escape)
             return state[MAINMENU];
+    if (event.type == sf::Event::MouseButtonPressed)
+        if (event.mouseButton.button == sf::Mouse::Left)
+        {
+            for (size_t i = 0; i < gameBoard.getNumberOfRow(); i++)
+                for (size_t j = 0; j < gameBoard.getNumberOfColumn(); j++)
+                {
+                    if (gameBoard.getListOfTiles()[i][j]->isTileSelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                        gameBoard.getListOfTiles()[i][j]->setTileColor(sf::Color::Green);
+                }
+        }
+
     return this;
 }
 
