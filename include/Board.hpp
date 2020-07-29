@@ -12,6 +12,7 @@ class Board
 {
 public:
     Board();
+    ~Board();
     size_t getNumberOfRow() const;
     size_t getNumberOfColumn() const;
     TileList getListOfTiles() const;

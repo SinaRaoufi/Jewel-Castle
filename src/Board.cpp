@@ -11,6 +11,13 @@ Board::Board()
         }
 }
 
+Board::~Board()
+{
+    for (auto &row : listOfTiles)
+        for (auto& item : row)
+            delete item;
+}
+
 void Board::render(sf::RenderWindow &window)
 {
     for (auto row : listOfTiles)
