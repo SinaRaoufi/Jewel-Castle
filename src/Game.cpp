@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "States/MainMenuState.hpp"
 
-Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE), currentState(nullptr)
+Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE,sf::Style::Close), currentState(nullptr)
 {
     for (size_t i = 0; i < NUMBER_OF_STATES; i++)
         statesList[i] = nullptr;

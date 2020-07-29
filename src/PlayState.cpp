@@ -2,7 +2,7 @@
 
 PlayState::PlayState()
 {
-    backgroundPath = "play_background.png";
+    backgroundPath = "play.png";
     setBackground();
 }
 
@@ -22,4 +22,5 @@ GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
 void PlayState::render(sf::RenderWindow &window)
 {
     window.draw(backgroundSprite);
+    gameBoard.render(window);
 }
