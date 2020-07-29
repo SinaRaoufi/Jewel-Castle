@@ -17,3 +17,18 @@ void Board::render(sf::RenderWindow &window)
         for (auto item : row)
             item->render(window);
 }
+
+size_t Board::getNumberOfRow() const
+{
+    return this->numberOfRow;
+}
+
+size_t Board::getNumberOfColumn() const
+{
+    return this->numberOfColumn;
+}
+
+TileList Board::getListOfTiles() const
+{
+    return listOfTiles;
+}
