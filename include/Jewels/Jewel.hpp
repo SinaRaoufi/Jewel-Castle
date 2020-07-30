@@ -7,7 +7,7 @@
 class Jewel
 {
 public:
-    Jewel(unsigned int);
+    explicit Jewel(unsigned int);
     // ~Jewel();
     unsigned int getJewelScore() const;
     void render(sf::RenderWindow &);
