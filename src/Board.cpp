@@ -14,7 +14,7 @@ Board::Board()
 Board::~Board()
 {
     for (auto &row : listOfTiles)
-        for (auto& item : row)
+        for (auto &item : row)
             delete item;
 }
 
