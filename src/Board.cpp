@@ -15,6 +15,10 @@ using namespace std;
 Board::Board()
 {
     generateRandomJewels(listOfJewels);
+    if (isJewelsCombinationValid())
+        cout << "Ok" << endl;
+    else
+        cout << "Not Ok" << endl;
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
         {
@@ -109,4 +113,30 @@ void Board::generateRandomJewels(JewelList &listOfJewels)
                 break;
             }
         }
+}
+
+// Check jewels combination
+bool Board::isJewelsCombinationValid() const
+{
+    // Check jewels horizontaly
+    for (size_t i = 0; i < numberOfRow; i++)
+        for (size_t j = 0; j < numberOfColumn - 1; j++)
+            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore())
+            {
+                if (j + 2 == numberOfColumn)
+                    continue;
+                if (listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                    return false;
+            }
+    // Check jewels verticaly
+    for (size_t i = 0; i < numberOfColumn; i++)
+        for (size_t j = 0; j < numberOfRow - 1; j++)
+            if (listOfJewels[j][i]->getJewelScore() == listOfJewels[j][i + 1]->getJewelScore())
+            {
+                if (i + 2 == numberOfRow)
+                    continue;
+                if (listOfJewels[j][i + 1]->getJewelScore() == listOfJewels[j][i + 2]->getJewelScore())
+                    return false;
+            }
+    return true;
 }
