@@ -20,10 +20,8 @@ Board::Board()
             item = nullptr;
     initial(listOfJewels);
 
-    if (isJewelsCombinationValid())
-        cout << "Ok" << endl;
-    else
-        cout << "Not Ok" << endl;
+    while (!isJewelsCombinationValid())
+        validateJewels();
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
         {
@@ -173,4 +171,35 @@ bool Board::isJewelsCombinationValid() const
                     return false;
             }
     return true;
+}
+
+void Board::validateJewels()
+{
+    // Check jewels horizontaly
+    for (size_t i = 0; i < numberOfRow; i++)
+        for (size_t j = 0; j < numberOfColumn - 1; j++)
+            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore())
+            {
+                if (j + 2 == numberOfColumn)
+                    continue;
+                if (listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                {
+                    delete listOfJewels[i][j + 1];
+                    listOfJewels[i][j + 1] = generateRandomJewel();
+                }
+            }
+    // Check jewels verticaly
+    for (size_t i = 0; i < numberOfColumn; i++)
+        for (size_t j = 0; j < numberOfRow - 1; j++)
+            if (listOfJewels[j][i]->getJewelScore() == listOfJewels[j][i + 1]->getJewelScore())
+            {
+                if (i + 2 == numberOfRow)
+                    continue;
+                if (listOfJewels[j][i + 1]->getJewelScore() == listOfJewels[j][i + 2]->getJewelScore())
+                {
+                    delete listOfJewels[j][i + 1];
+                    cout << listOfJewels[j][i + 1]->getJewelScore() << endl;
+                    listOfJewels[j][i + 1] = generateRandomJewel();
+                }
+            }
 }

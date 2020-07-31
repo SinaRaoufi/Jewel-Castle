@@ -6,6 +6,7 @@
 #include "Tile.hpp"
 #include "Jewels/Jewel.hpp"
 #include "configs.hpp"
+#include <memory>
 
 typedef std::array<std::array<Tile *, NUM_OF_COLUMN>, NUM_OF_ROW> TileList;
 typedef std::array<std::array<Jewel *, NUM_OF_COLUMN>, NUM_OF_ROW> JewelList;
@@ -31,6 +32,7 @@ private:
     JewelList listOfJewels;
     us generateRandomNumber(us, us); // utility member function for generating random number
     bool isJewelsCombinationValid() const;
+    void validateJewels();
 };
 
 #endif
