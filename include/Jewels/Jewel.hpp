@@ -4,6 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include "configs.hpp"
 
+enum JewelsEnum
+{
+    YELLOW_JEWEL,
+    GREEN_JEWEL,
+    RED_JEWEL,
+    BLUE_JEWEL,
+    PINK_JEWEL,
+    VIOLET_JEWEL
+};
+
 class Jewel
 {
 public:

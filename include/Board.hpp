@@ -19,7 +19,9 @@ public:
     size_t getNumberOfRow() const;
     size_t getNumberOfColumn() const;
     TileList getListOfTiles() const;
-    void generateRandomJewels(JewelList &);
+    void initial(JewelList &);
+    // void generateRandomJewels(Jewel *);
+    Jewel* generateRandomJewel();
     void render(sf::RenderWindow &);
 
 private:

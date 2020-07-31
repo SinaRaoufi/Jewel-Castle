@@ -14,7 +14,12 @@ using namespace std;
 
 Board::Board()
 {
-    generateRandomJewels(listOfJewels);
+    // initialize each element of listOfJewels to nullptr
+    for (auto &row : listOfJewels)
+        for (auto &item : row)
+            item = nullptr;
+    initial(listOfJewels);
+
     if (isJewelsCombinationValid())
         cout << "Ok" << endl;
     else
@@ -77,42 +82,71 @@ us Board::generateRandomNumber(us range1, us range2)
     return randomID(mt);
 }
 
-void Board::generateRandomJewels(JewelList &listOfJewels)
+// void Board::generateRandomJewels(Jewel *jewel)
+// {
+//     cout << "Done !" << endl;
+//     if (jewel != nullptr)
+//     {
+//         // cout << "In" << endl;
+//         delete jewel;
+//     }
+//     cout << "Done !" << endl;
+
+//     switch (generateRandomNumber(YELLOW_JEWEL, VIOLET_JEWEL))
+//     {
+//     case YELLOW_JEWEL:
+//         jewel = new YellowJewel();
+//         break;
+//     case GREEN_JEWEL:
+//         jewel = new GreenJewel();
+//         break;
+//     case RED_JEWEL:
+//         jewel = new RedJewel();
+//         break;
+//     case BLUE_JEWEL:
+//         jewel = new BlueJewel();
+//         break;
+//     case PINK_JEWEL:
+//         jewel = new PinkJewel();
+//         break;
+//     case VIOLET_JEWEL:
+//         jewel = new VioletJewel();
+//         break;
+//     }
+// }
+
+Jewel *Board::generateRandomJewel()
 {
-    enum JewelsEnum
+    Jewel *jewel;
+    switch (generateRandomNumber(YELLOW_JEWEL, VIOLET_JEWEL))
     {
-        YELLOW_JEWEL,
-        GREEN_JEWEL,
-        RED_JEWEL,
-        BLUE_JEWEL,
-        PINK_JEWEL,
-        VIOLET_JEWEL
-    };
+    case YELLOW_JEWEL:
+        jewel = new YellowJewel();
+        break;
+    case GREEN_JEWEL:
+        jewel = new GreenJewel();
+        break;
+    case RED_JEWEL:
+        jewel = new RedJewel();
+        break;
+    case BLUE_JEWEL:
+        jewel = new BlueJewel();
+        break;
+    case PINK_JEWEL:
+        jewel = new PinkJewel();
+        break;
+    case VIOLET_JEWEL:
+        jewel = new VioletJewel();
+        break;
+    }
+    return jewel;
+}
+
+void Board::initial(JewelList &listOfJewels)
+{
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
-        {
-            switch (generateRandomNumber(YELLOW_JEWEL, VIOLET_JEWEL))
-            {
-            case YELLOW_JEWEL:
-                listOfJewels[i][j] = new YellowJewel();
-                break;
-            case GREEN_JEWEL:
-                listOfJewels[i][j] = new GreenJewel();
-                break;
-            case RED_JEWEL:
-                listOfJewels[i][j] = new RedJewel();
-                break;
-            case BLUE_JEWEL:
-                listOfJewels[i][j] = new BlueJewel();
-                break;
-            case PINK_JEWEL:
-                listOfJewels[i][j] = new PinkJewel();
-                break;
-            case VIOLET_JEWEL:
-                listOfJewels[i][j] = new VioletJewel();
-                break;
-            }
-        }
+            listOfJewels[i][j] = generateRandomJewel();
 }
 
 // Check jewels combination
