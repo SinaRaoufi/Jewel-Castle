@@ -161,13 +161,13 @@ bool Board::isJewelsCombinationValid() const
                     return false;
             }
     // Check jewels verticaly
-    for (size_t i = 0; i < numberOfColumn; i++)
-        for (size_t j = 0; j < numberOfRow - 1; j++)
-            if (listOfJewels[j][i]->getJewelScore() == listOfJewels[j][i + 1]->getJewelScore())
+    for (size_t j = 0; j < numberOfColumn; j++)
+        for (size_t i = 0; i < numberOfRow - 1; i++)
+            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i + 1][j]->getJewelScore())
             {
                 if (i + 2 == numberOfRow)
                     continue;
-                if (listOfJewels[j][i + 1]->getJewelScore() == listOfJewels[j][i + 2]->getJewelScore())
+                if (listOfJewels[i + 1][j]->getJewelScore() == listOfJewels[i + 2][j]->getJewelScore())
                     return false;
             }
     return true;
@@ -189,17 +189,16 @@ void Board::validateJewels()
                 }
             }
     // Check jewels verticaly
-    for (size_t i = 0; i < numberOfColumn; i++)
-        for (size_t j = 0; j < numberOfRow - 1; j++)
-            if (listOfJewels[j][i]->getJewelScore() == listOfJewels[j][i + 1]->getJewelScore())
+    for (size_t j = 0; j < numberOfColumn; j++)
+        for (size_t i = 0; i < numberOfRow - 1; i++)
+            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i + 1][j]->getJewelScore())
             {
                 if (i + 2 == numberOfRow)
                     continue;
-                if (listOfJewels[j][i + 1]->getJewelScore() == listOfJewels[j][i + 2]->getJewelScore())
+                if (listOfJewels[i + 1][j]->getJewelScore() == listOfJewels[i + 2][j]->getJewelScore())
                 {
-                    delete listOfJewels[j][i + 1];
-                    cout << listOfJewels[j][i + 1]->getJewelScore() << endl;
-                    listOfJewels[j][i + 1] = generateRandomJewel();
+                    delete listOfJewels[i + 1][j];
+                    listOfJewels[i + 1][j] = generateRandomJewel();
                 }
             }
 }
