@@ -27,3 +27,5 @@ bool Jewel::isJewelSelected(sf::Vector2f mousePoint)
         return true;
     return false;
 }
+
+Jewel::~Jewel(){};

@@ -18,7 +18,7 @@ class Jewel
 {
 public:
     explicit Jewel(unsigned int);
-    // ~Jewel();
+    virtual ~Jewel() = 0;
     unsigned int getJewelScore() const;
     void render(sf::RenderWindow &);
     void setJewelPosition(float, float);
