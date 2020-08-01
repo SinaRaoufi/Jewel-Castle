@@ -31,8 +31,8 @@ private:
     TileList listOfTiles;
     JewelList listOfJewels;
     us generateRandomNumber(us, us); // utility member function for generating random number
-    bool isJewelsCombinationValid() const;
-    void validateJewels();
+    bool isJewelsCombinationValid() const; // utility member function for check jewels combination
+    void validateJewels();  // utility member function for validating jewels combination
 };
 
 #endif

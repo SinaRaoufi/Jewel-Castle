@@ -19,9 +19,10 @@ Board::Board()
         for (auto &item : row)
             item = nullptr;
     initial(listOfJewels);
-
+    // Validate jewels combination
     while (!isJewelsCombinationValid())
         validateJewels();
+    // Set tiles and jewels position
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
         {
@@ -175,7 +176,7 @@ bool Board::isJewelsCombinationValid() const
 
 void Board::validateJewels()
 {
-    // Check jewels horizontaly
+    // Validate jewels horizontaly
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn - 1; j++)
             if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore())
@@ -188,7 +189,7 @@ void Board::validateJewels()
                     listOfJewels[i][j + 1] = generateRandomJewel();
                 }
             }
-    // Check jewels verticaly
+    // Validate jewels verticaly
     for (size_t j = 0; j < numberOfColumn; j++)
         for (size_t i = 0; i < numberOfRow - 1; i++)
             if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i + 1][j]->getJewelScore())
