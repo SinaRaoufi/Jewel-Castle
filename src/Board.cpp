@@ -72,6 +72,11 @@ TileList Board::getListOfTiles() const
     return listOfTiles;
 }
 
+JewelList Board::getListOfJewels() const
+{
+    return listOfJewels;
+}
+
 // utility member function for generating random number
 us Board::generateRandomNumber(us range1, us range2)
 {

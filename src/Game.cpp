@@ -10,8 +10,8 @@ Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TIT
 // initialize the game
 void Game::init()
 {
-    statesList[0] = new MainMenuState();
-    currentState = statesList[0];
+    statesList[MAINMENU] = new MainMenuState();
+    currentState = statesList[MAINMENU];
     run();
 }
 
