@@ -22,17 +22,18 @@ public:
     JewelList getListOfJewels() const;
     void initial(JewelList &);
     // void generateRandomJewels(Jewel *);
-    Jewel* generateRandomJewel();
+    Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);
+    void swapTwoJewels(size_t, size_t, size_t, size_t);
 
 private:
     const size_t numberOfRow = NUM_OF_ROW;
     const size_t numberOfColumn = NUM_OF_COLUMN;
     TileList listOfTiles;
     JewelList listOfJewels;
-    us generateRandomNumber(us, us); // utility member function for generating random number
+    us generateRandomNumber(us, us);       // utility member function for generating random number
     bool isJewelsCombinationValid() const; // utility member function for check jewels combination
-    void validateJewels();  // utility member function for validating jewels combination
+    void validateJewels();                 // utility member function for validating jewels combination
 };
 
 #endif

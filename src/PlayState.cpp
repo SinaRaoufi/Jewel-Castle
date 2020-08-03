@@ -52,7 +52,8 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             second.choosenTile->setTileColor(sf::Color::Black);
                             second.iPosition = i;
                             second.jPosition = j;
-                            cout << boolalpha << isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition) << endl;
+                            if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
+                                gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
                         }
                         else
                         {

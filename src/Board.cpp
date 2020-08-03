@@ -208,3 +208,8 @@ void Board::validateJewels()
                 }
             }
 }
+
+void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2)
+{
+    swap(listOfJewels[i1][j1], listOfJewels[i2][j2]);
+}
