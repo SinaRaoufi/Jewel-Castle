@@ -1,6 +1,7 @@
 #include <Board.hpp>
 #include <ctime>
 #include <random>
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 #include "Jewels/YellowJewel.hpp"
@@ -211,5 +212,43 @@ void Board::validateJewels()
 
 void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2)
 {
+    listOfJewels[i1][j1]->setJewelPosition(j2 * Tile_WIDTH + 150, Tile_HEIGHT * i2 + 150);
+    listOfJewels[i2][j2]->setJewelPosition(j1 * Tile_WIDTH + 150, Tile_HEIGHT * i1 + 150);
     swap(listOfJewels[i1][j1], listOfJewels[i2][j2]);
+}
+
+void Board::refreshBoard()
+{
+    // Refresh game board horizontaly
+    for (size_t i = numberOfRow - 1; i > 0; i--)
+        for (size_t j = 0; j < numberOfColumn - 1; j++)
+        {
+            if (j + 2 != numberOfColumn)
+                if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore() &&
+                    listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                {
+                    unsigned short int score = listOfJewels[i][j]->getJewelScore();
+                    size_t k = j;
+                    while (listOfJewels[i][k]->getJewelScore() == score)
+                    {
+                        if (k == numberOfColumn)
+                            break;
+                        delete listOfJewels[i][k];
+                        for (size_t f = i - 1; f != -1; f--)
+                        {
+                            listOfJewels[f + 1][k] = listOfJewels[f][k];
+                            listOfJewels[f + 1][k]->setJewelPosition(k * Tile_WIDTH + 150, Tile_HEIGHT * (f + 1) + 150);
+                        }
+                        listOfJewels[0][k] = generateRandomJewel();
+                        while (listOfJewels[0][k]->getJewelScore() == score)
+                        {
+                            delete listOfJewels[0][k];
+                            generateRandomJewel();
+                        }
+                        listOfJewels[0][k]->setJewelPosition(k * Tile_WIDTH + 150, Tile_HEIGHT * 0 + 150);
+                        k++;
+                    }
+                    return;
+                }
+        }
 }

@@ -25,6 +25,7 @@ public:
     Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);
     void swapTwoJewels(size_t, size_t, size_t, size_t);
+    void refreshBoard();
 
 private:
     const size_t numberOfRow = NUM_OF_ROW;

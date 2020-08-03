@@ -53,7 +53,10 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             second.iPosition = i;
                             second.jPosition = j;
                             if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
+                            {
                                 gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
+                                gameBoard.refreshBoard();
+                            }
                         }
                         else
                         {
