@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "configs.hpp"
+#include <string>
 
 enum JewelsEnum
 {
@@ -22,10 +23,11 @@ public:
     unsigned int getJewelScore() const;
     void render(sf::RenderWindow &);
     void setJewelPosition(float, float);
-    bool isJewelSelected(sf::Vector2f);
+    // bool isJewelSelected(sf::Vector2f);
 
 protected:
     sf::CircleShape jewelShape;
+    sf::Texture jewelTexture;
     unsigned int score;
 };
 

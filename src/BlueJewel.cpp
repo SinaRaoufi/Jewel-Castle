@@ -1,5 +1,7 @@
 #include "Jewels/BlueJewel.hpp"
 
+using namespace std;
+
 BlueJewel::BlueJewel() : Jewel(BLUE_JEWEL_SCORE)
 {
     // set blue jewel properties
@@ -7,5 +9,8 @@ BlueJewel::BlueJewel() : Jewel(BLUE_JEWEL_SCORE)
     this->jewelShape.setPointCount(5);
     this->jewelShape.setFillColor(sf::Color::Blue);
     this->jewelShape.setOutlineThickness(1);
-    this->jewelShape.setOutlineColor(sf::Color::Cyan);
+    this->jewelShape.setOutlineColor(sf::Color::Blue);
+    this->jewelTexture.loadFromFile(Texture_DIRECTORY + string("blueT.png"));
+    this->jewelTexture.setSmooth(true);
+    this->jewelShape.setTexture(&jewelTexture);
 }

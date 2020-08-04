@@ -11,6 +11,7 @@
 
 // Directory Settings
 #define BACKGROUND_DIRECTORY "../assets/backgrounds/"
+#define Texture_DIRECTORY "../assets/jewelsTexture/"
 #define FONT_DIRECTORY "../assets/fonts/"
 
 // Board Settings

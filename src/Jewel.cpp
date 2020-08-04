@@ -21,11 +21,11 @@ void Jewel::setJewelPosition(float x, float y)
     this->jewelShape.setPosition(x, y);
 }
 
-bool Jewel::isJewelSelected(sf::Vector2f mousePoint)
-{
-    if (this->jewelShape.getGlobalBounds().contains(mousePoint))
-        return true;
-    return false;
-}
+// bool Jewel::isJewelSelected(sf::Vector2f mousePoint)
+// {
+//     if (this->jewelShape.getGlobalBounds().contains(mousePoint))
+//         return true;
+//     return false;
+// }
 
 Jewel::~Jewel(){};

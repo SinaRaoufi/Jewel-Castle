@@ -16,7 +16,7 @@ struct ChoosenEntity second;
 
 PlayState::PlayState()
 {
-    backgroundPath = "play.png";
+    backgroundPath = "play_background.jpg";
     setBackground();
 }
 

@@ -1,5 +1,7 @@
 #include "Jewels/VioletJewel.hpp"
 
+using namespace std;
+
 VioletJewel::VioletJewel() : Jewel(VIOLET_JEWEL_SCORE)
 {
     // set violet jewel properties
@@ -8,5 +10,7 @@ VioletJewel::VioletJewel() : Jewel(VIOLET_JEWEL_SCORE)
     sf::Color violetColor(148, 0, 211);
     this->jewelShape.setFillColor(violetColor);
     this->jewelShape.setOutlineThickness(1);
-    this->jewelShape.setOutlineColor(sf::Color::Cyan);
+    this->jewelShape.setOutlineColor(sf::Color::Red);
+    this->jewelTexture.loadFromFile(Texture_DIRECTORY + string("violetT.jpg"));
+    this->jewelShape.setTexture(&jewelTexture);
 }
