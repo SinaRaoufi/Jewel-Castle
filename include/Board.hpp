@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <vector>
 #include "Tile.hpp"
 #include "Jewels/Jewel.hpp"
 #include "configs.hpp"
@@ -10,6 +11,7 @@
 typedef std::array<std::array<Tile *, NUM_OF_COLUMN>, NUM_OF_ROW> TileList;
 typedef std::array<std::array<Jewel *, NUM_OF_COLUMN>, NUM_OF_ROW> JewelList;
 typedef unsigned short int us;
+typedef std::vector<std::pair<us, us>> scorePair;
 
 class Board
 {
@@ -25,7 +27,7 @@ public:
     Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);
     void swapTwoJewels(size_t, size_t, size_t, size_t);
-    void refreshBoard();
+    scorePair refreshBoard();
 
 private:
     const size_t numberOfRow = NUM_OF_ROW;

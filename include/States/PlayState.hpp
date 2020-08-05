@@ -3,6 +3,7 @@
 
 #include "States/GameState.hpp"
 #include "Board.hpp"
+#include "Score.hpp"
 
 class PlayState : public GameState
 {
@@ -14,6 +15,7 @@ public:
 
 private:
     Board gameBoard;
+    Score gameScore;
 };
 
 #endif

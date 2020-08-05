@@ -3,6 +3,7 @@
 
 #include <iostream>
 using namespace std;
+
 struct ChoosenEntity
 {
     Jewel *choosenJewel = nullptr;
@@ -14,7 +15,7 @@ struct ChoosenEntity
 struct ChoosenEntity first;
 struct ChoosenEntity second;
 
-PlayState::PlayState()
+PlayState::PlayState() : gameScore(REQUIRED_SCORE)
 {
     backgroundPath = "play_background.jpg";
     setBackground();
@@ -55,7 +56,14 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
                             {
                                 gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
-                                gameBoard.refreshBoard();
+                                scorePair p = gameBoard.refreshBoard();
+                                for (const auto &item : p)
+                                {
+                                    cout << item.first << ' ' << item.second << endl;
+                                    gameScore.increaseScore(item.first * item.second);
+                                }
+                                cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
+                                // remember to set first and second to nullptr
                             }
                         }
                         else
@@ -85,4 +93,5 @@ void PlayState::render(sf::RenderWindow &window)
 {
     window.draw(backgroundSprite);
     gameBoard.render(window);
+    gameScore.render(window);
 }

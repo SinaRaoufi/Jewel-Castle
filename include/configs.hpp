@@ -28,4 +28,7 @@
 #define PINK_JEWEL_SCORE 14
 #define VIOLET_JEWEL_SCORE 15
 
+// Game Settings
+#define REQUIRED_SCORE 1200
+
 #endif
