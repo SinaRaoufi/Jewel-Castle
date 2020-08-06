@@ -8,13 +8,16 @@ class Button
 {
 public:
     // Button();
-    Button(float, float, float, float, std::string, std::string);
-    void render(sf::RenderWindow &);
+    Button(std::string, std::string);
+    Button(size_t, std::string, std::string);
+    void setButtonPosition(float, float);
+    void setButtonTexture(std::string);
     bool isButtonPressed(sf::Vector2f);
+    void render(sf::RenderWindow &);
 
 private:
-    sf::RectangleShape buttonShape;
-    // sf::Texture buttonTexture;
+    sf::CircleShape buttonShape;
+    sf::Texture buttonTexture;
     sf::Font buttonTextFont;
     sf::Text buttonText;
 };
