@@ -11,6 +11,6 @@ VioletJewel::VioletJewel() : Jewel(VIOLET_JEWEL_SCORE)
     this->jewelShape.setFillColor(violetColor);
     this->jewelShape.setOutlineThickness(1);
     this->jewelShape.setOutlineColor(sf::Color::Red);
-    this->jewelTexture.loadFromFile(Texture_DIRECTORY + string("violetT.jpg"));
+    this->jewelTexture.loadFromFile(TEXTURE_DIRECTORY + string("violetT.jpg"));
     this->jewelShape.setTexture(&jewelTexture);
 }

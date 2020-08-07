@@ -9,6 +9,6 @@ GreenJewel::GreenJewel() : Jewel(GREEN_JEWEL_SCORE)
     this->jewelShape.setPointCount(4);
     this->jewelShape.setOutlineThickness(1);
     this->jewelShape.setOutlineColor(sf::Color::Green);
-    this->jewelTexture.loadFromFile(Texture_DIRECTORY + string("greenT.jpg"));
+    this->jewelTexture.loadFromFile(TEXTURE_DIRECTORY + string("greenT.jpg"));
     this->jewelShape.setTexture(&jewelTexture);
 }

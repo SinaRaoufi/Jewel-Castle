@@ -11,13 +11,13 @@
 
 // Directory Settings
 #define BACKGROUND_DIRECTORY "../assets/backgrounds/"
-#define Texture_DIRECTORY "../assets/jewelsTexture/"
+#define TEXTURE_DIRECTORY "../assets/jewelsTexture/"
 #define FONT_DIRECTORY "../assets/fonts/"
 #define ABILITIES_TEXTURE_DIRECTORY "../assets/abilitiesTexture/"
 
 // Board Settings
-#define Tile_HEIGHT 45.f
-#define Tile_WIDTH 45.f
+#define TILE_HEIGHT 45.f
+#define TILE_WIDTH 45.f
 #define NUM_OF_ROW 9
 #define NUM_OF_COLUMN 9
 
