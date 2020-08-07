@@ -23,7 +23,6 @@ public:
     unsigned int getJewelScore() const;
     void render(sf::RenderWindow &);
     void setJewelPosition(float, float);
-    // bool isJewelSelected(sf::Vector2f);
 
 protected:
     sf::CircleShape jewelShape;
