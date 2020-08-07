@@ -28,8 +28,8 @@ Board::Board()
         {
             sf::Color tileColor(216, 191, 216);
             listOfTiles[i][j] = new Tile(TILE_WIDTH, TILE_HEIGHT, tileColor, sf::Color::Black);
-            listOfTiles[i][j]->setTilePosition(j * TILE_WIDTH + 150, TILE_HEIGHT * i + 150);
-            listOfJewels[i][j]->setJewelPosition(j * TILE_WIDTH + 150, TILE_HEIGHT * i + 150);
+            listOfTiles[i][j]->setTilePosition(j, i);
+            listOfJewels[i][j]->setJewelPosition(j, i);
         }
 }
 
@@ -202,8 +202,8 @@ void Board::validateJewels()
 
 void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2)
 {
-    listOfJewels[i1][j1]->setJewelPosition(j2 * TILE_WIDTH + 150, TILE_HEIGHT * i2 + 150);
-    listOfJewels[i2][j2]->setJewelPosition(j1 * TILE_WIDTH + 150, TILE_HEIGHT * i1 + 150);
+    listOfJewels[i1][j1]->setJewelPosition(j2, i2);
+    listOfJewels[i2][j2]->setJewelPosition(j1, i1);
     swap(listOfJewels[i1][j1], listOfJewels[i2][j2]);
 }
 
@@ -232,7 +232,7 @@ scorePair Board::refreshBoard()
                                 for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
                                 {
                                     listOfJewels[f + 1][k] = listOfJewels[f][k];
-                                    listOfJewels[f + 1][k]->setJewelPosition(k * TILE_WIDTH + 150, TILE_HEIGHT * (f + 1) + 150);
+                                    listOfJewels[f + 1][k]->setJewelPosition(k, (f + 1));
                                 }
                             listOfJewels[0][k] = generateRandomJewel();
                             while (listOfJewels[0][k]->getJewelScore() == jewelScore)
@@ -240,7 +240,7 @@ scorePair Board::refreshBoard()
                                 delete listOfJewels[0][k];
                                 listOfJewels[0][k] = generateRandomJewel();
                             }
-                            listOfJewels[0][k]->setJewelPosition(k * TILE_WIDTH + 150, TILE_HEIGHT * 0 + 150);
+                            listOfJewels[0][k]->setJewelPosition(k, 0);
                             k++;
                             numberOfDeletedJewel++;
                         }
@@ -262,7 +262,7 @@ scorePair Board::refreshBoard()
                             for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
                             {
                                 listOfJewels[f + 1][j] = listOfJewels[f][j];
-                                listOfJewels[f + 1][j]->setJewelPosition(j * TILE_WIDTH + 150, TILE_HEIGHT * (f + 1) + 150);
+                                listOfJewels[f + 1][j]->setJewelPosition(j, (f + 1));
                             }
                             listOfJewels[0][j] = generateRandomJewel();
                             while (listOfJewels[0][j]->getJewelScore() == jewelScore)
@@ -270,7 +270,7 @@ scorePair Board::refreshBoard()
                                 delete listOfJewels[0][j];
                                 listOfJewels[0][j] = generateRandomJewel();
                             }
-                            listOfJewels[0][j]->setJewelPosition(j * TILE_WIDTH + 150, TILE_HEIGHT * 0 + 150);
+                            listOfJewels[0][j]->setJewelPosition(j, 0);
                             numberOfDeletedJewel++;
                         }
                         p.push_back(make_pair(numberOfDeletedJewel, jewelScore));
@@ -290,10 +290,10 @@ void Board::removeRow(size_t i)
             for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
             {
                 listOfJewels[f + 1][j] = listOfJewels[f][j];
-                listOfJewels[f + 1][j]->setJewelPosition(j * TILE_WIDTH + 150, TILE_HEIGHT * (f + 1) + 150);
+                listOfJewels[f + 1][j]->setJewelPosition(j, (f + 1));
             }
         listOfJewels[0][j] = generateRandomJewel();
-        listOfJewels[0][j]->setJewelPosition(j * TILE_WIDTH + 150, TILE_HEIGHT * 0 + 150);
+        listOfJewels[0][j]->setJewelPosition(j, 0);
     }
     while (!isJewelsCombinationValid())
         refreshBoard();
@@ -315,7 +315,7 @@ void Board::removeRectangle(size_t i, size_t j)
             cout << k << ' ' << f << endl;
             delete listOfJewels[k][f];
             listOfJewels[k][f] = generateRandomJewel();
-            listOfJewels[k][f]->setJewelPosition(f * TILE_WIDTH + 150, TILE_HEIGHT * k + 150);
+            listOfJewels[k][f]->setJewelPosition(f, k);
         }
 }
 
@@ -335,6 +335,6 @@ void Board::removeThreeRowColumn(size_t i, size_t j)
             cout << k << ' ' << f << endl;
             delete listOfJewels[k][f];
             listOfJewels[k][f] = generateRandomJewel();
-            listOfJewels[k][f]->setJewelPosition(f * TILE_WIDTH + 150, TILE_HEIGHT * k + 150);
+            listOfJewels[k][f]->setJewelPosition(f, k);
         }
 }

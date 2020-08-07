@@ -18,7 +18,7 @@ unsigned int Jewel::getJewelScore() const
 
 void Jewel::setJewelPosition(float x, float y)
 {
-    this->jewelShape.setPosition(x, y);
+    this->jewelShape.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
 Jewel::~Jewel(){};

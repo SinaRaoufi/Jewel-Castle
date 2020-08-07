@@ -1,4 +1,5 @@
 #include "Tile.hpp"
+#include "configs.hpp"
 
 Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor)
 {
@@ -11,7 +12,7 @@ Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutline
 
 void Tile::setTilePosition(float x, float y)
 {
-    this->tileShape.setPosition(x, y);
+    this->tileShape.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
 void Tile::render(sf::RenderWindow &window)
