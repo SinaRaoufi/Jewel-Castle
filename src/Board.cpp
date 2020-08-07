@@ -150,21 +150,21 @@ bool Board::isJewelsCombinationValid() const
     // Check jewels horizontaly
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn - 1; j++)
-            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore())
+            if (*listOfJewels[i][j] == *listOfJewels[i][j + 1])
             {
                 if (j + 2 == numberOfColumn)
                     continue;
-                if (listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                if (*listOfJewels[i][j + 1] == *listOfJewels[i][j + 2])
                     return false;
             }
     // Check jewels verticaly
     for (size_t j = 0; j < numberOfColumn; j++)
         for (size_t i = 0; i < numberOfRow - 1; i++)
-            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i + 1][j]->getJewelScore())
+            if (*listOfJewels[i][j] == *listOfJewels[i + 1][j])
             {
                 if (i + 2 == numberOfRow)
                     continue;
-                if (listOfJewels[i + 1][j]->getJewelScore() == listOfJewels[i + 2][j]->getJewelScore())
+                if (*listOfJewels[i + 1][j] == *listOfJewels[i + 2][j])
                     return false;
             }
     return true;
@@ -175,11 +175,11 @@ void Board::validateJewels()
     // Validate jewels horizontaly
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn - 1; j++)
-            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore())
+            if (*listOfJewels[i][j] == *listOfJewels[i][j + 1])
             {
                 if (j + 2 == numberOfColumn)
                     continue;
-                if (listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                if (*listOfJewels[i][j + 1] == *listOfJewels[i][j + 2])
                 {
                     delete listOfJewels[i][j + 1];
                     listOfJewels[i][j + 1] = generateRandomJewel();
@@ -188,11 +188,11 @@ void Board::validateJewels()
     // Validate jewels verticaly
     for (size_t j = 0; j < numberOfColumn; j++)
         for (size_t i = 0; i < numberOfRow - 1; i++)
-            if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i + 1][j]->getJewelScore())
+            if (*listOfJewels[i][j] == *listOfJewels[i + 1][j])
             {
                 if (i + 2 == numberOfRow)
                     continue;
-                if (listOfJewels[i + 1][j]->getJewelScore() == listOfJewels[i + 2][j]->getJewelScore())
+                if (*listOfJewels[i + 1][j] == *listOfJewels[i + 2][j])
                 {
                     delete listOfJewels[i + 1][j];
                     listOfJewels[i + 1][j] = generateRandomJewel();
@@ -218,8 +218,8 @@ scorePair Board::refreshBoard()
             for (size_t j = 0; j < numberOfColumn - 1; j++)
             {
                 if (j + 1 != numberOfColumn)
-                    if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i][j + 1]->getJewelScore() &&
-                        listOfJewels[i][j + 1]->getJewelScore() == listOfJewels[i][j + 2]->getJewelScore())
+                    if (*listOfJewels[i][j] == *listOfJewels[i][j + 1] &&
+                        *listOfJewels[i][j + 1] == *listOfJewels[i][j + 2])
                     {
                         us jewelScore = listOfJewels[i][j]->getJewelScore();
                         size_t k = j;
@@ -252,8 +252,8 @@ scorePair Board::refreshBoard()
             for (int i = numberOfRow - 1; i > 0; i--)
             {
                 if (i - 1 != 0)
-                    if (listOfJewels[i][j]->getJewelScore() == listOfJewels[i - 1][j]->getJewelScore() &&
-                        listOfJewels[i - 1][j]->getJewelScore() == listOfJewels[i - 2][j]->getJewelScore())
+                    if (*listOfJewels[i][j] == *listOfJewels[i - 1][j] &&
+                        *listOfJewels[i - 1][j] == *listOfJewels[i - 2][j])
                     {
                         us jewelScore = listOfJewels[i][j]->getJewelScore();
                         while (listOfJewels[i][j]->getJewelScore() == jewelScore)

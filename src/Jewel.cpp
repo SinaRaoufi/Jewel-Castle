@@ -21,4 +21,9 @@ void Jewel::setJewelPosition(float x, float y)
     this->jewelShape.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
+bool Jewel::operator==(const Jewel &secondJewel)
+{
+    return this->score == secondJewel.score;
+}
+
 Jewel::~Jewel(){};
