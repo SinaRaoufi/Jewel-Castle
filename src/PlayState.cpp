@@ -41,6 +41,12 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE)
     abilities.at(BOMB)->setPosition(390, 90);
 }
 
+PlayState::~PlayState()
+{
+    for (auto &ability : abilities)
+        delete ability;
+}
+
 GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
 {
     abilities.at(2)->activateAbility();
