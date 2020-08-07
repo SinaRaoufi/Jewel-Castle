@@ -28,6 +28,9 @@ public:
     void render(sf::RenderWindow &);
     void swapTwoJewels(size_t, size_t, size_t, size_t);
     scorePair refreshBoard();
+    void removeRow(size_t);
+    void removeRectangle(size_t, size_t);
+    void removeThreeRowColumn(size_t, size_t);
 
 private:
     const size_t numberOfRow = NUM_OF_ROW;

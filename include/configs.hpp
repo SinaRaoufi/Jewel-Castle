@@ -13,6 +13,7 @@
 #define BACKGROUND_DIRECTORY "../assets/backgrounds/"
 #define Texture_DIRECTORY "../assets/jewelsTexture/"
 #define FONT_DIRECTORY "../assets/fonts/"
+#define ABILITIES_TEXTURE_DIRECTORY "../assets/abilitiesTexture/"
 
 // Board Settings
 #define Tile_HEIGHT 45.f
@@ -30,5 +31,6 @@
 
 // Game Settings
 #define REQUIRED_SCORE 1200
+#define NUM_OF_ABILITIES 3
 
 #endif

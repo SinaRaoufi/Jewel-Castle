@@ -19,5 +19,9 @@ add_executable(JewelCastle
     src/RedJewel.cpp
     src/PinkJewel.cpp
     src/Move.cpp
-    src/Score.cpp)
+    src/Score.cpp
+    src/Ability.cpp
+    src/MagnetAbility.cpp
+    src/FistAbility.cpp
+    src/BombAbility.cpp)
     target_link_libraries(JewelCastle sfml-window sfml-system sfml-graphics)

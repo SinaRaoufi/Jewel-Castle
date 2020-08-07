@@ -4,6 +4,7 @@
 #include "States/GameState.hpp"
 #include "Board.hpp"
 #include "Score.hpp"
+#include "Abilities/Ability.hpp"
 
 class PlayState : public GameState
 {
@@ -16,6 +17,7 @@ public:
 private:
     Board gameBoard;
     Score gameScore;
+    std::array<Ability *, NUM_OF_ABILITIES> abilities;
 };
 
 #endif
