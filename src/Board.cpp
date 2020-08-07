@@ -1,7 +1,6 @@
 #include <Board.hpp>
-#include <ctime>
-#include <random>
 #include <vector>
+#include "RandomNumberGenerator.hpp"
 #include <SFML/Graphics.hpp>
 
 #include "Jewels/YellowJewel.hpp"
@@ -76,15 +75,6 @@ TileList Board::getListOfTiles() const
 JewelList Board::getListOfJewels() const
 {
     return listOfJewels;
-}
-
-// utility member function for generating random number
-us Board::generateRandomNumber(us range1, us range2)
-{
-    random_device randomDevice;
-    mt19937 mt(randomDevice());
-    uniform_int_distribution<us> randomID(range1, range2);
-    return randomID(mt);
 }
 
 // void Board::generateRandomJewels(Jewel *jewel)
