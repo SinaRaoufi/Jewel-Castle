@@ -317,6 +317,8 @@ void Board::removeRectangle(size_t i, size_t j)
             listOfJewels[k][f] = generateRandomJewel();
             listOfJewels[k][f]->setJewelPosition(f, k);
         }
+    while (!isJewelsCombinationValid())
+        refreshBoard();
 }
 
 void Board::removeThreeRowColumn(size_t i, size_t j)
