@@ -33,12 +33,12 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), g
         ability = nullptr;
     backgroundPath = "play_background.jpg";
     setBackground();
-    abilities.at(MAGNET) = new MagnetAbility();
-    abilities.at(MAGNET)->setPosition(270, 90);
-    abilities.at(FIST) = new FistAbility();
-    abilities.at(FIST)->setPosition(330, 90);
-    abilities.at(BOMB) = new BombAbility();
-    abilities.at(BOMB)->setPosition(390, 90);
+    abilities[MAGNET] = new MagnetAbility();
+    abilities[MAGNET]->setPosition(270, 90);
+    abilities[FIST] = new FistAbility();
+    abilities[FIST]->setPosition(330, 90);
+    abilities[BOMB] = new BombAbility();
+    abilities[BOMB]->setPosition(390, 90);
     gameScore.setScoreProgressBarPosition(530, 0);
     gameTimer.setTimerProgressBarPosition(560, 70);
 }
