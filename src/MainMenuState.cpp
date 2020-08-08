@@ -7,7 +7,7 @@ using namespace std;
 MainMenuState::MainMenuState() : playButton(FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"), "Start Game")
 {
     playButton.setButtonPosition(100,100);
-    backgroundPath = "main_menu.png";
+    backgroundPath = "main_menu.jpg";
     setBackground();
 }
 
