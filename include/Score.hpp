@@ -14,11 +14,14 @@ public:
     void decreaseScore(us);
     us getCurrentScore() const;
     us getRequiredScore() const;
+    void setScoreProgressBarPosition(float, float);
     void render(sf::RenderWindow&);
 
 private:
     us currentScore;
     us requiredScore;
+    sf::Sprite scoreSprite;
+    sf::Texture scoreTexture;
     sf::Font scoreTextFont;
     sf::Text scoreText;
 };
