@@ -14,6 +14,7 @@ public:
 
 private:
     Button playButton;
+    Button exitButton;
 };
 
 #endif
