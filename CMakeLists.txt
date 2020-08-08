@@ -21,6 +21,7 @@ add_executable(JewelCastle
     src/PinkJewel.cpp
     src/Move.cpp
     src/Score.cpp
+    src/Timer.cpp
     src/Ability.cpp
     src/MagnetAbility.cpp
     src/FistAbility.cpp

@@ -33,6 +33,7 @@
 // Game Settings
 #define REQUIRED_SCORE 1200
 #define NUM_OF_ABILITIES 3
+#define TIMER_COUNTDOWN 32
 #define NUM_OF_MOVE 32
 
 #endif

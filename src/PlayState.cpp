@@ -27,7 +27,7 @@ enum abilityStates
 
 short int abilityState = -1;
 
-PlayState::PlayState() : gameScore(REQUIRED_SCORE)
+PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE),gameTimer(TIMER_COUNTDOWN)
 {
     for (auto &ability : abilities)
         ability = nullptr;
@@ -39,6 +39,8 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE)
     abilities.at(FIST)->setPosition(330, 90);
     abilities.at(BOMB) = new BombAbility();
     abilities.at(BOMB)->setPosition(390, 90);
+    gameScore.setScoreProgressBarPosition(530,0);
+    gameTimer.setTimerProgressBarPosition(560,70);
 }
 
 PlayState::~PlayState()
@@ -75,18 +77,21 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 gameBoard.removeRow(i);
                                 abilities[MAGNET]->inactivateAbility();
                                 abilityState = -1;
+                                numberOfMove--;
                                 // score would be increase by each jewel's score plus 100
                                 break;
                             case FIST:
                                 gameBoard.removeRectangle(i, j);
                                 abilities[FIST]->inactivateAbility();
                                 abilityState = -1;
+                                numberOfMove--;
                                 // score would be increase by each jewel's score plus 150
                                 break;
                             case BOMB:
                                 // gameBoard.removeRectangle(i, j);
                                 abilities[BOMB]->inactivateAbility();
                                 abilityState = -1;
+                                numberOfMove--;
                                 // score would be increase by each jewel's score plus 200
                                 break;
                             }
@@ -135,6 +140,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 }
                                 cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
                                 // remember to set first and second to nullptr
+                                numberOfMove--;
                             }
                         }
                         else
@@ -157,6 +163,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
 
 GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
 {
+    gameTimer.updateTime();
     return this;
 }
 
@@ -167,4 +174,5 @@ void PlayState::render(sf::RenderWindow &window)
     gameScore.render(window);
     for (const auto &ability : abilities)
         ability->render(window);
+    gameTimer.render(window);
 }
