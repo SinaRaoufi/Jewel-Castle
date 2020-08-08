@@ -15,6 +15,7 @@
 #define FONT_DIRECTORY "../assets/fonts/"
 #define ABILITIES_TEXTURE_DIRECTORY "../assets/abilitiesTexture/"
 #define PROGRESS_BAR_TEXTURE_DIRECTORY "../assets/progressBar/"
+#define BUTTON_TEXTURE_DIRECTORY "../assets/buttonsTexture/"
 
 // Board Settings
 #define TILE_HEIGHT 45.f

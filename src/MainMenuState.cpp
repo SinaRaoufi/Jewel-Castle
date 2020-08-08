@@ -4,9 +4,9 @@
 
 using namespace std;
 
-MainMenuState::MainMenuState() : playButton(FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"), "Start Game")
+MainMenuState::MainMenuState() : playButton(BUTTON_TEXTURE_DIRECTORY +string("play_button.png"))
 {
-    playButton.setButtonPosition(100,100);
+    playButton.setButtonPosition(250,200);
     backgroundPath = "main_menu.jpg";
     setBackground();
 }
