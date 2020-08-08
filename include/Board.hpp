@@ -28,8 +28,8 @@ public:
     void render(sf::RenderWindow &);
     void swapTwoJewels(size_t, size_t, size_t, size_t);
     scorePair refreshBoard();
-    void removeRow(size_t);
-    void removeRectangle(size_t, size_t);
+    unsigned int removeRow(size_t);
+    unsigned int removeRectangle(size_t, size_t);
     void removeThreeRowColumn(size_t, size_t);
 
 private:
@@ -38,7 +38,7 @@ private:
     TileList listOfTiles;
     JewelList listOfJewels;
     bool isJewelsCombinationValid() const; // utility member function for check jewels combination
-    void validateJewels();                 // utility member function for validating jewels combination
+    void validateJewels(); // utility member function for validating jewels combination
 };
 
 #endif

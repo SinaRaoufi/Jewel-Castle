@@ -281,10 +281,13 @@ scorePair Board::refreshBoard()
     return p;
 }
 
-void Board::removeRow(size_t i)
+unsigned int Board::removeRow(size_t i)
 {
+    scorePair p;
+    unsigned int score = 0;
     for (size_t j = 0; j < numberOfColumn; j++)
     {
+        score += listOfJewels[i][j]->getJewelScore();
         delete listOfJewels[i][j];
         if (i != 0)
             for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
@@ -296,11 +299,18 @@ void Board::removeRow(size_t i)
         listOfJewels[0][j]->setJewelPosition(j, 0);
     }
     while (!isJewelsCombinationValid())
-        refreshBoard();
+    {
+        p = refreshBoard();
+        for (const auto &item : p)
+            score += item.second;
+    }
+    return score;
 }
 
-void Board::removeRectangle(size_t i, size_t j)
+unsigned int Board::removeRectangle(size_t i, size_t j)
 {
+    scorePair p;
+    unsigned int score = 0;
     if (i - 4 < 0)
         i = 0;
     else if (i + 4 > numberOfRow)
@@ -312,13 +322,18 @@ void Board::removeRectangle(size_t i, size_t j)
     for (size_t k = i; k < i + 4; k++)
         for (size_t f = j; f < j + 4; f++)
         {
-            cout << k << ' ' << f << endl;
+            score += listOfJewels[k][f]->getJewelScore();
             delete listOfJewels[k][f];
             listOfJewels[k][f] = generateRandomJewel();
             listOfJewels[k][f]->setJewelPosition(f, k);
         }
     while (!isJewelsCombinationValid())
-        refreshBoard();
+    {
+        p = refreshBoard();
+        for (const auto &item : p)
+            score += item.second;
+    }
+    return score;
 }
 
 void Board::removeThreeRowColumn(size_t i, size_t j)
