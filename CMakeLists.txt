@@ -8,6 +8,7 @@ add_executable(JewelCastle
     src/GameState.cpp
     src/MainMenuState.cpp
     src/PlayState.cpp
+    src/PauseState.cpp
     src/Button.cpp
     src/RandomNumberGenerator.cpp
     src/Tile.cpp
