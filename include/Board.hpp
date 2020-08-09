@@ -22,7 +22,7 @@ public:
     size_t getNumberOfColumn() const;
     TileList getListOfTiles() const;
     JewelList getListOfJewels() const;
-    void initial(JewelList &);
+    void shuffleJewels(JewelList &);
     // void generateRandomJewels(Jewel *);
     Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);

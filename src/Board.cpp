@@ -16,9 +16,14 @@ Board::Board()
 {
     // initialize each element of listOfJewels to nullptr
     for (auto &row : listOfJewels)
-        for (auto &item : row)
-            item = nullptr;
-    initial(listOfJewels);
+        for (auto &jewel : row)
+            jewel = nullptr;
+    // initialize each element of listOfTiles to nullptr
+    for (auto &row : listOfTiles)
+        for (auto &tile : row)
+            tile = nullptr;
+
+    shuffleJewels(listOfJewels);
     // Validate jewels combination
     while (!isJewelsCombinationValid())
         validateJewels();
@@ -137,11 +142,15 @@ Jewel *Board::generateRandomJewel()
     return jewel;
 }
 
-void Board::initial(JewelList &listOfJewels)
+void Board::shuffleJewels(JewelList &listOfJewels)
 {
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
+        {
+            if (listOfJewels[i][j] != nullptr)
+                delete listOfJewels[i][j];
             listOfJewels[i][j] = generateRandomJewel();
+        }
 }
 
 // Check jewels combination
