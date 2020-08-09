@@ -11,9 +11,11 @@ public:
     void render(sf::RenderWindow &);
     bool isTileSelected(sf::Vector2f);
     void setTileColor(sf::Color);
+    void resetTileColorToDefualt();
 
 private:
     sf::RectangleShape tileShape;
+    sf::Color tileColor;
 };
 
 #endif

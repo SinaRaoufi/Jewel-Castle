@@ -1,7 +1,7 @@
 #include "Tile.hpp"
 #include "configs.hpp"
 
-Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor)
+Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor) tileColor(tileColor)
 {
     // tile shape properties
     this->tileShape.setSize(sf::Vector2f(width, height));
@@ -30,4 +30,9 @@ bool Tile::isTileSelected(sf::Vector2f mousePoint)
 void Tile::setTileColor(sf::Color color)
 {
     this->tileShape.setFillColor(color);
+}
+
+void Tile::resetTileColorToDefualt()
+{
+    this->tileShape.setFillColor(tileColor);
 }

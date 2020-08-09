@@ -146,14 +146,14 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
                                 numberOfMove--;
                             }
-                            gameBoard.getListOfTiles()[first.iPosition][first.jPosition]->setTileColor(sf::Color(216, 191, 216));
+                            gameBoard.getListOfTiles()[first.iPosition][first.jPosition]->resetTileColorToDefualt();
                             first.choosenJewel = nullptr;
-                            gameBoard.getListOfTiles()[second.iPosition][second.jPosition]->setTileColor(sf::Color(216, 191, 216));
+                            gameBoard.getListOfTiles()[second.iPosition][second.jPosition]->resetTileColorToDefualt();
                             second.choosenJewel = nullptr;
                         }
                         else if (first.iPosition != i || first.jPosition != j)
                         {
-                            first.choosenTile->setTileColor(sf::Color(216, 191, 216));
+                            first.choosenTile->resetTileColorToDefualt();
                             first.choosenJewel = gameBoard.getListOfJewels()[i][j];
                             first.iPosition = i;
                             first.jPosition = j;
