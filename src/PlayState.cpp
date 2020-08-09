@@ -20,16 +20,18 @@ struct ChoosenEntity second;
 
 enum abilityStates
 {
+    NONE = -1,
     MAGNET,
     FIST,
     BOMB
 };
 
-short int abilityState = -1;
+short int abilityState = NONE;
 
 PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), gameTimer(TIMER_COUNTDOWN),
                          pauseButton(BUTTON_TEXTURE_DIRECTORY + string("pause_button.png"))
 {
+    // initialize each elements to nullptr
     for (auto &ability : abilities)
         ability = nullptr;
     backgroundPath = "play_background.jpg";
@@ -59,50 +61,45 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)
         {
+            // checks whether the ability is selected or not
             for (size_t i = MAGNET; i < NUM_OF_ABILITIES; i++)
-                if (abilities[i])
-                    if (abilities[i]->isAbilityActive())
-                        if (abilities[i]->isAbilitySelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-                            abilityState = i;
+                if (abilities[i]->isAbilityActive())
+                    if (abilities[i]->isAbilitySelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                        abilityState = i;
 
+            // checks whether the tile is selected or not
             for (size_t i = 0; i < gameBoard.getNumberOfRow(); i++)
                 for (size_t j = 0; j < gameBoard.getNumberOfColumn(); j++)
                 {
                     if (gameBoard.getListOfTiles()[i][j]->isTileSelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                     {
-                        if (abilityState != -1)
+                        if (abilityState != NONE)
                         {
+                            unsigned int score;
                             switch (abilityState)
                             {
                             case MAGNET:
                             {
-                                unsigned int score = gameBoard.removeRow(i);
+                                score = gameBoard.removeRow(i);
                                 abilities[MAGNET]->inactivateAbility();
-                                abilityState = -1;
-                                numberOfMove--;
                                 gameScore.increaseScore(score + 100);
-                                // score would be increase by each jewel's score plus 100
                                 break;
                             }
                             case FIST:
                             {
-                                unsigned int score = gameBoard.removeRectangle(i, j);
+                                score = gameBoard.removeRectangle(i, j);
                                 abilities[FIST]->inactivateAbility();
-                                abilityState = -1;
-                                numberOfMove--;
                                 gameScore.increaseScore(score + 150);
-                                // score would be increase by each jewel's score plus 150
                                 break;
                             }
                             case BOMB:
-                                unsigned int score = gameBoard.removeThreeRowColumn(i, j);
+                                score = gameBoard.removeThreeRowColumn(i, j);
                                 abilities[BOMB]->inactivateAbility();
-                                abilityState = -1;
-                                numberOfMove--;
                                 gameScore.increaseScore(score + 200);
-                                // score would be increase by each jewel's score plus 200
                                 break;
                             }
+                            abilityState = NONE;
+                            numberOfMove--;
                             break;
                         }
 
