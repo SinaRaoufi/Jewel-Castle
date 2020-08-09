@@ -17,14 +17,17 @@ PauseState::PauseState() : resumeButton(BUTTON_TEXTURE_DIRECTORY + string("resum
 
 GameState *PauseState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
 {
+    // checks whether the resume button is selected or not
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)
             if (this->resumeButton.isButtonPressed(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 return state[PLAY];
+    // checks whether the exit button is selected or not
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)
             if (this->exitButton.isButtonPressed(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 return state[MAINMENU];
+    // checks whether the restart button is selected or not
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)
             if (this->restartButton.isButtonPressed(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
