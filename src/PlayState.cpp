@@ -109,13 +109,13 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             first.iPosition = i;
                             first.jPosition = j;
                             first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                            first.choosenTile->setTileColor(sf::Color::Green);
+                            first.choosenTile->setTileColor(sf::Color(255, 69, 0));
                             break;
                         }
-                        if (first.iPosition == i && first.jPosition - 1 == j ||
-                            first.iPosition == i && first.jPosition + 1 == j ||
-                            first.iPosition + 1 == i && first.jPosition == j ||
-                            first.iPosition - 1 == i && first.jPosition == j)
+                        else if (first.iPosition == i && first.jPosition - 1 == j ||
+                                 first.iPosition == i && first.jPosition + 1 == j ||
+                                 first.iPosition + 1 == i && first.jPosition == j ||
+                                 first.iPosition - 1 == i && first.jPosition == j)
                         {
                             second.choosenJewel = gameBoard.getListOfJewels()[i][j];
                             second.choosenTile = gameBoard.getListOfTiles()[i][j];
@@ -144,20 +144,21 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                     }
                                 }
                                 cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
-                                // remember to set first and second to nullptr
                                 numberOfMove--;
                             }
+                            gameBoard.getListOfTiles()[first.iPosition][first.jPosition]->setTileColor(sf::Color(216, 191, 216));
+                            first.choosenJewel = nullptr;
+                            gameBoard.getListOfTiles()[second.iPosition][second.jPosition]->setTileColor(sf::Color(216, 191, 216));
+                            second.choosenJewel = nullptr;
                         }
-                        else
+                        else if (first.iPosition != i || first.jPosition != j)
                         {
                             first.choosenTile->setTileColor(sf::Color(216, 191, 216));
-                            if (second.choosenTile != nullptr)
-                                second.choosenTile->setTileColor(sf::Color(216, 191, 216));
                             first.choosenJewel = gameBoard.getListOfJewels()[i][j];
                             first.iPosition = i;
                             first.jPosition = j;
                             first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                            first.choosenTile->setTileColor(sf::Color::Green);
+                            first.choosenTile->setTileColor(sf::Color(255, 69, 0));
                         }
                     }
                 }
