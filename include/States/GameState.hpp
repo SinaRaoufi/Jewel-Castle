@@ -10,7 +10,8 @@ enum States
 {
     MAINMENU,
     PLAY,
-    PAUSE
+    PAUSE,
+    WIN
 };
 
 class GameState
