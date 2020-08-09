@@ -163,7 +163,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                     }
                 }
         }
-
     return this;
 }
 

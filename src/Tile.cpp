@@ -1,7 +1,7 @@
 #include "Tile.hpp"
 #include "configs.hpp"
 
-Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor) tileColor(tileColor)
+Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor): tileColor(tileColor)
 {
     // tile shape properties
     this->tileShape.setSize(sf::Vector2f(width, height));
