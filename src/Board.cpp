@@ -1,7 +1,7 @@
 #include <Board.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include "RandomNumberGenerator.hpp"
-#include <SFML/Graphics.hpp>
 
 #include "Jewels/YellowJewel.hpp"
 #include "Jewels/GreenJewel.hpp"
@@ -14,20 +14,19 @@ using namespace std;
 
 Board::Board()
 {
-    // initialize each element of listOfJewels to nullptr
+    // initializes each element of listOfJewels to nullptr
     for (auto &row : listOfJewels)
         for (auto &jewel : row)
             jewel = nullptr;
-    // initialize each element of listOfTiles to nullptr
+    // initializes each element of listOfTiles to nullptr
     for (auto &row : listOfTiles)
         for (auto &tile : row)
             tile = nullptr;
-
     shuffleJewels(listOfJewels);
-    // Validate jewels combination
+    // validates jewels combination
     while (!isJewelsCombinationValid())
         validateJewels();
-    // Set tiles and jewels position
+    // sets tiles and jewels position
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
         {
@@ -40,26 +39,27 @@ Board::Board()
 
 Board::~Board()
 {
-    // delete each tile
+    // deletes each tile that allocated dynamically
     for (auto &row : listOfTiles)
-        for (auto &item : row)
-            delete item;
+        for (auto &tile : row)
+            delete tile;
 
-    //delete each jewel
+    //deletes each jewel that allocated dynamically
     for (auto &row : listOfJewels)
-        for (auto &item : row)
-            delete item;
+        for (auto &jewel : row)
+            delete jewel;
 }
 
 void Board::render(sf::RenderWindow &window)
 {
+    // draws each tile in the window
     for (auto row : listOfTiles)
-        for (auto item : row)
-            item->render(window);
-
+        for (auto tile : row)
+            tile->render(window);
+    // draws each jewel in the window
     for (auto row : listOfJewels)
-        for (auto item : row)
-            item->render(window);
+        for (auto jewel : row)
+            jewel->render(window);
 }
 
 size_t Board::getNumberOfRow() const
