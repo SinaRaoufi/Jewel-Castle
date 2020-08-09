@@ -36,11 +36,11 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), g
     setBackground();
     pauseButton.setButtonPosition(0, 0);
     abilities[MAGNET] = new MagnetAbility();
-    abilities[MAGNET]->setPosition(270, 90);
+    abilities[MAGNET]->setPosition(265, 90);
     abilities[FIST] = new FistAbility();
-    abilities[FIST]->setPosition(330, 90);
+    abilities[FIST]->setPosition(325, 90);
     abilities[BOMB] = new BombAbility();
-    abilities[BOMB]->setPosition(390, 90);
+    abilities[BOMB]->setPosition(385, 90);
     gameScore.setScoreProgressBarPosition(530, 0);
     gameTimer.setTimerProgressBarPosition(560, 70);
 }
@@ -136,13 +136,13 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                     switch (item.first)
                                     {
                                     case 4:
-                                        abilities.at(0)->activateAbility();
+                                        abilities[MAGNET]->activateAbility();
                                         break;
                                     case 5:
-                                        abilities.at(1)->activateAbility();
+                                        abilities[FIST]->activateAbility();
                                         break;
                                     case 6:
-                                        abilities.at(2)->activateAbility();
+                                        abilities[BOMB]->activateAbility();
                                         break;
                                     }
                                 }
