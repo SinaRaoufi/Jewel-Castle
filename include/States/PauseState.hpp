@@ -14,6 +14,7 @@ public:
 
 private:
     Button resumeButton;
+    Button restartButton;
     Button exitButton;
 };
 
