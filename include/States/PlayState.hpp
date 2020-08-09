@@ -5,6 +5,7 @@
 #include "Board.hpp"
 #include "Score.hpp"
 #include "Timer.hpp"
+#include "Button.hpp"
 #include "Abilities/Ability.hpp"
 
 class PlayState : public GameState
@@ -22,6 +23,7 @@ private:
     Timer gameTimer;
     size_t numberOfMove;
     std::array<Ability *, NUM_OF_ABILITIES> abilities;
+    Button pauseButton;
 };
 
 #endif

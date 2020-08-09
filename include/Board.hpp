@@ -30,7 +30,7 @@ public:
     scorePair refreshBoard();
     unsigned int removeRow(size_t);
     unsigned int removeRectangle(size_t, size_t);
-    void removeThreeRowColumn(size_t, size_t);
+    unsigned int removeThreeRowColumn(size_t, size_t);
 
 private:
     const size_t numberOfRow = NUM_OF_ROW;

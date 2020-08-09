@@ -336,22 +336,40 @@ unsigned int Board::removeRectangle(size_t i, size_t j)
     return score;
 }
 
-void Board::removeThreeRowColumn(size_t i, size_t j)
+unsigned int Board::removeThreeRowColumn(size_t rowIndex, size_t columnIndex)
 {
-    if (i - 4 < 0)
-        i = 0;
-    else if (i + 4 > numberOfRow)
-        i = 5;
-    if (j - 4 < 0)
-        j = 0;
-    else if (j + 4 > numberOfColumn)
-        j = 5;
-    for (size_t k = i; k < i + 4; k++)
-        for (size_t f = j; f < j + 4; f++)
+    unsigned int score = 0;
+    scorePair p;
+    if (rowIndex > 6)
+        rowIndex = 6;
+    if (columnIndex > 6)
+        columnIndex = 6;
+    for (size_t j = columnIndex; j < columnIndex + 3; j++)
+        for (size_t i = 0; i < numberOfRow; i++)
         {
-            cout << k << ' ' << f << endl;
-            delete listOfJewels[k][f];
-            listOfJewels[k][f] = generateRandomJewel();
-            listOfJewels[k][f]->setJewelPosition(f, k);
+            score += listOfJewels[i][j]->getJewelScore();
+            delete listOfJewels[i][j]; // line 350 , 351 could be one function
+            listOfJewels[i][j] = generateRandomJewel();
+            listOfJewels[i][j]->setJewelPosition(j, i);
         }
+    for (size_t i = rowIndex; i < rowIndex + 3; i++)
+        for (size_t j = 0; j < numberOfColumn; j++)
+        {
+            if (j == columnIndex)
+            {
+                j = columnIndex + 2;
+                continue;
+            }
+            score += listOfJewels[i][j]->getJewelScore();
+            delete listOfJewels[i][j];
+            listOfJewels[i][j] = generateRandomJewel();
+            listOfJewels[i][j]->setJewelPosition(j, i);
+        }
+    while (!isJewelsCombinationValid())
+    {
+        p = refreshBoard();
+        for (const auto &item : p)
+            score += item.second;
+    }
+    return score;
 }

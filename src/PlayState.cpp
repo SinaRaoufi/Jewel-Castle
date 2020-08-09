@@ -27,12 +27,14 @@ enum abilityStates
 
 short int abilityState = -1;
 
-PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), gameTimer(TIMER_COUNTDOWN)
+PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), gameTimer(TIMER_COUNTDOWN),
+                         pauseButton(BUTTON_TEXTURE_DIRECTORY + string("pause_button.png"))
 {
     for (auto &ability : abilities)
         ability = nullptr;
     backgroundPath = "play_background.jpg";
     setBackground();
+    pauseButton.setButtonPosition(0, 0);
     abilities[MAGNET] = new MagnetAbility();
     abilities[MAGNET]->setPosition(270, 90);
     abilities[FIST] = new FistAbility();
@@ -51,7 +53,6 @@ PlayState::~PlayState()
 
 GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
 {
-    abilities.at(2)->activateAbility();
     if (event.type == sf::Event::KeyPressed)
         if (event.key.code == sf::Keyboard::Escape)
             return state[MAINMENU];
@@ -92,94 +93,95 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 gameScore.increaseScore(score + 150);
                                 // score would be increase by each jewel's score plus 150
                                 break;
-                                
-                                }
+                            }
                             case BOMB:
-                                // gameBoard.removeRectangle(i, j);
+                                unsigned int score = gameBoard.removeThreeRowColumn(i, j);
                                 abilities[BOMB]->inactivateAbility();
                                 abilityState = -1;
                                 numberOfMove--;
+                                gameScore.increaseScore(score + 200);
                                 // score would be increase by each jewel's score plus 200
                                 break;
                             }
                             break;
-                            }
+                        }
 
-                            if (first.choosenJewel == nullptr)
+                        if (first.choosenJewel == nullptr)
+                        {
+                            first.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            first.iPosition = i;
+                            first.jPosition = j;
+                            first.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            first.choosenTile->setTileColor(sf::Color::Green);
+                            break;
+                        }
+                        if (first.iPosition == i && first.jPosition - 1 == j ||
+                            first.iPosition == i && first.jPosition + 1 == j ||
+                            first.iPosition + 1 == i && first.jPosition == j ||
+                            first.iPosition - 1 == i && first.jPosition == j)
+                        {
+                            second.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            second.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            second.choosenTile->setTileColor(sf::Color::Black);
+                            second.iPosition = i;
+                            second.jPosition = j;
+                            if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
                             {
-                                first.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                                first.iPosition = i;
-                                first.jPosition = j;
-                                first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                                first.choosenTile->setTileColor(sf::Color::Green);
-                                break;
-                            }
-                            if (first.iPosition == i && first.jPosition - 1 == j ||
-                                first.iPosition == i && first.jPosition + 1 == j ||
-                                first.iPosition + 1 == i && first.jPosition == j ||
-                                first.iPosition - 1 == i && first.jPosition == j)
-                            {
-                                second.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                                second.choosenTile = gameBoard.getListOfTiles()[i][j];
-                                second.choosenTile->setTileColor(sf::Color::Black);
-                                second.iPosition = i;
-                                second.jPosition = j;
-                                if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
+                                gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
+                                scorePair p = gameBoard.refreshBoard();
+                                for (const auto &item : p)
                                 {
-                                    gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
-                                    scorePair p = gameBoard.refreshBoard();
-                                    for (const auto &item : p)
+                                    cout << item.first << ' ' << item.second << endl;
+                                    gameScore.increaseScore(item.first * item.second);
+                                    switch (item.first)
                                     {
-                                        cout << item.first << ' ' << item.second << endl;
-                                        gameScore.increaseScore(item.first * item.second);
-                                        switch (item.first)
-                                        {
-                                        case 4:
-                                            abilities.at(0)->activateAbility();
-                                            break;
-                                        case 5:
-                                            abilities.at(1)->activateAbility();
-                                            break;
-                                        case 6:
-                                            abilities.at(2)->activateAbility();
-                                            break;
-                                        }
+                                    case 4:
+                                        abilities.at(0)->activateAbility();
+                                        break;
+                                    case 5:
+                                        abilities.at(1)->activateAbility();
+                                        break;
+                                    case 6:
+                                        abilities.at(2)->activateAbility();
+                                        break;
                                     }
-                                    cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
-                                    // remember to set first and second to nullptr
-                                    numberOfMove--;
                                 }
+                                cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
+                                // remember to set first and second to nullptr
+                                numberOfMove--;
                             }
-                            else
-                            {
-                                first.choosenTile->setTileColor(sf::Color(216, 191, 216));
-                                if (second.choosenTile != nullptr)
-                                    second.choosenTile->setTileColor(sf::Color(216, 191, 216));
-                                first.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                                first.iPosition = i;
-                                first.jPosition = j;
-                                first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                                first.choosenTile->setTileColor(sf::Color::Green);
-                            }
+                        }
+                        else
+                        {
+                            first.choosenTile->setTileColor(sf::Color(216, 191, 216));
+                            if (second.choosenTile != nullptr)
+                                second.choosenTile->setTileColor(sf::Color(216, 191, 216));
+                            first.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            first.iPosition = i;
+                            first.jPosition = j;
+                            first.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            first.choosenTile->setTileColor(sf::Color::Green);
                         }
                     }
                 }
-
-            return this;
         }
 
-    GameState *PlayState::update(sf::RenderWindow & window, StateList & state)
-    {
-        gameTimer.updateTime();
-        return this;
-    }
+    return this;
+}
 
-    void PlayState::render(sf::RenderWindow & window)
-    {
-        window.draw(backgroundSprite);
-        gameBoard.render(window);
-        gameScore.render(window);
-        for (const auto &ability : abilities)
-            ability->render(window);
-        gameTimer.render(window);
-    }
+GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
+{
+    gameTimer.updateTime();
+    return this;
+}
+
+void PlayState::render(sf::RenderWindow &window)
+{
+    window.draw(backgroundSprite);
+    gameBoard.render(window);
+    gameScore.render(window);
+    for (const auto &ability : abilities)
+        ability->render(window);
+    gameTimer.render(window);
+    pauseButton.render(window);
+}
