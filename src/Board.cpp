@@ -22,6 +22,7 @@ Board::Board()
     for (auto &row : listOfTiles)
         for (auto &tile : row)
             tile = nullptr;
+    // generate random jewels for each tile
     shuffleJewels(listOfJewels);
     // validates jewels combination
     while (!isJewelsCombinationValid())
@@ -115,6 +116,7 @@ JewelList Board::getListOfJewels() const
 //     }
 // }
 
+// generate one jewel and return it
 Jewel *Board::generateRandomJewel()
 {
     Jewel *jewel;
@@ -179,6 +181,7 @@ bool Board::isJewelsCombinationValid() const
     return true;
 }
 
+// if three or more jewels are next to each other, it fixes their combination
 void Board::validateJewels()
 {
     // Validate jewels horizontaly
