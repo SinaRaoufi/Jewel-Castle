@@ -11,7 +11,8 @@ enum States
     MAINMENU,
     PLAY,
     PAUSE,
-    WIN
+    WIN,
+    LOST
 };
 
 class GameState
