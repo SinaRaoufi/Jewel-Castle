@@ -1,18 +1,19 @@
-#include "States/WinState.hpp"
+#include "States/LostState.hpp"
 #include "States/PlayState.hpp"
 #include <string>
 
 using namespace std;
 
-WinState::WinState() : restartButton(BUTTON_TEXTURE_DIRECTORY + string("restart_circle_button.png")),
-                       mainmenuButton(BUTTON_TEXTURE_DIRECTORY + string("mainmenu_circle_button.png"))
+LostState::LostState() : restartButton(BUTTON_TEXTURE_DIRECTORY + string("restart_circle_button.png")),
+                         mainmenuButton(BUTTON_TEXTURE_DIRECTORY + string("mainmenu_circle_button.png"))
 {
     backgroundPath = "win_background.jpg";
     setBackground();
     this->restartButton.setButtonPosition(255, 350);
     this->mainmenuButton.setButtonPosition(355, 354);
 }
-GameState *WinState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
+
+GameState *LostState::eventHandler(sf::RenderWindow &window, StateList &state, sf::Event &event)
 {
     // checks whether the restart button is selected or not
     if (event.type == sf::Event::MouseButtonPressed)
@@ -34,11 +35,13 @@ GameState *WinState::eventHandler(sf::RenderWindow &window, StateList &state, sf
             }
     return this;
 }
-GameState *WinState::update(sf::RenderWindow &window, StateList &state)
+
+GameState *LostState::update(sf::RenderWindow &window, StateList &state)
 {
     return this;
 }
-void WinState::render(sf::RenderWindow &window)
+
+void LostState::render(sf::RenderWindow &window)
 {
     window.draw(this->backgroundSprite);
     this->restartButton.render(window);
