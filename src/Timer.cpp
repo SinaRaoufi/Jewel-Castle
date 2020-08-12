@@ -12,9 +12,9 @@ Timer::Timer(int countDown): countDown(sf::seconds(countDown))
     this->timerFont.loadFromFile(FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"));
     this->timerText.setFont(timerFont);
     this->timerText.setCharacterSize(20);
-    this->timerText.setOutlineThickness(1);
-    this->timerText.setOutlineColor(sf::Color::Yellow);
-    this->timerText.setFillColor(sf::Color::Blue);
+    this->timerText.setOutlineThickness(1.5);
+    this->timerText.setOutlineColor(sf::Color::Blue);
+    this->timerText.setFillColor(sf::Color::White);
 }
 
 void Timer::updateTime()
