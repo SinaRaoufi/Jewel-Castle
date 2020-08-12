@@ -8,7 +8,7 @@ Jewel::Jewel(unsigned int score)
 
 void Jewel::render(sf::RenderWindow &window)
 {
-    window.draw(this->jewelShape);
+    window.draw(this->jewelSprite);
 }
 
 unsigned int Jewel::getJewelScore() const
@@ -18,7 +18,7 @@ unsigned int Jewel::getJewelScore() const
 
 void Jewel::setJewelPosition(float x, float y)
 {
-    this->jewelShape.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
+    this->jewelSprite.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
 bool Jewel::operator==(const Jewel &secondJewel)

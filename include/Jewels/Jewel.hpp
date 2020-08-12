@@ -26,7 +26,7 @@ public:
     bool operator==(const Jewel &);
 
 protected:
-    sf::CircleShape jewelShape;
+    sf::Sprite jewelSprite;
     sf::Texture jewelTexture;
     unsigned int score;
 };
