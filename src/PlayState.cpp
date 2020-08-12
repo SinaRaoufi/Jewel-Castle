@@ -28,7 +28,7 @@ enum abilityStates
 
 short int abilityState = NONE;
 
-PlayState::PlayState() : gameScore(REQUIRED_SCORE), numberOfMove(NUM_OF_MOVE), gameTimer(TIMER_COUNTDOWN),
+PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN),
                          pauseButton(BUTTON_TEXTURE_DIRECTORY + string("pause_button.png"))
 {
     // initialize each elements to nullptr
@@ -101,7 +101,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             break;
                         }
                         abilityState = NONE;
-                        numberOfMove--;
                         break;
                     }
 
@@ -124,7 +123,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                         second.choosenTile->setTileColor(sf::Color::Black);
                         second.iPosition = i;
                         second.jPosition = j;
-                        if (isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
+                        if (gameMove.isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
                         {
                             gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
                             scorePair p = gameBoard.refreshBoard();
@@ -146,7 +145,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 }
                             }
                             cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
-                            numberOfMove--;
                         }
                         gameBoard.getListOfTiles()[first.iPosition][first.jPosition]->resetTileColorToDefualt();
                         first.choosenJewel = nullptr;

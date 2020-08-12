@@ -1,7 +1,7 @@
 #include "Move.hpp"
 
 // Check vertical move
-bool checkVerticalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2)
+bool Move::checkVerticalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2) const
 {
     if (j2 != 0 || j2 != NUM_OF_COLUMN - 1)
         if (*gameBoard.getListOfJewels()[i2][j2 - 1] == *gameBoard.getListOfJewels()[i1][j1] &&
@@ -47,7 +47,7 @@ bool checkVerticalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, 
 }
 
 // Check horizantal move
-bool checkHorizontalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2)
+bool Move::checkHorizontalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2) const
 {
     if (i2 != 0)
     {
@@ -94,7 +94,7 @@ bool checkHorizontalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2
     return false;
 }
 
-bool isMoveValid(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2)
+bool Move::isMoveValid(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2) const
 {
     // Check vertical move
     if (j1 == j2)
