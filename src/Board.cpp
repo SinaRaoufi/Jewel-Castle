@@ -31,8 +31,7 @@ Board::Board()
     for (size_t i = 0; i < numberOfRow; i++)
         for (size_t j = 0; j < numberOfColumn; j++)
         {
-            sf::Color tileColor(216, 191, 216);
-            listOfTiles[i][j] = new Tile(TILE_WIDTH, TILE_HEIGHT, tileColor, sf::Color::Black);
+            listOfTiles[i][j] = new Tile();
             listOfTiles[i][j]->setTilePosition(j, i);
             listOfJewels[i][j]->setJewelPosition(j, i);
         }

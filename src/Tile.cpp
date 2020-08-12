@@ -1,38 +1,29 @@
 #include "Tile.hpp"
 #include "configs.hpp"
+#include <string>
 
-Tile::Tile(float width, float height, sf::Color tileColor, sf::Color tileOutlineColor): tileColor(tileColor)
+using namespace std;
+
+Tile::Tile()
 {
     // tile shape properties
-    this->tileShape.setSize(sf::Vector2f(width, height));
-    this->tileShape.setFillColor(tileColor);
-    this->tileShape.setOutlineColor(tileOutlineColor);
-    this->tileShape.setOutlineThickness(2);
+    this->tileTexture.loadFromFile(TILE_TEXTURE_DIRECTORY + string("tile_background.jpg"));
+    this->tileSprite.setTexture(this->tileTexture);
 }
 
 void Tile::setTilePosition(float x, float y)
 {
-    this->tileShape.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
+    this->tileSprite.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
 void Tile::render(sf::RenderWindow &window)
 {
-    window.draw(this->tileShape);
+    window.draw(this->tileSprite);
 }
 
 bool Tile::isTileSelected(sf::Vector2f mousePoint)
 {
-    if (tileShape.getGlobalBounds().contains(mousePoint))
+    if (this->tileSprite.getGlobalBounds().contains(mousePoint))
         return true;
     return false;
-}
-
-void Tile::setTileColor(sf::Color color)
-{
-    this->tileShape.setFillColor(color);
-}
-
-void Tile::resetTileColorToDefualt()
-{
-    this->tileShape.setFillColor(tileColor);
 }

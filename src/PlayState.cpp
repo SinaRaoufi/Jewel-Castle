@@ -110,7 +110,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                         first.iPosition = i;
                         first.jPosition = j;
                         first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                        first.choosenTile->setTileColor(sf::Color(255, 69, 0));
                         break;
                     }
                     else if (first.iPosition == i && first.jPosition - 1 == j ||
@@ -120,7 +119,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                     {
                         second.choosenJewel = gameBoard.getListOfJewels()[i][j];
                         second.choosenTile = gameBoard.getListOfTiles()[i][j];
-                        second.choosenTile->setTileColor(sf::Color::Black);
                         second.iPosition = i;
                         second.jPosition = j;
                         if (gameMove.isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
@@ -146,19 +144,15 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                             }
                             cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
                         }
-                        gameBoard.getListOfTiles()[first.iPosition][first.jPosition]->resetTileColorToDefualt();
                         first.choosenJewel = nullptr;
-                        gameBoard.getListOfTiles()[second.iPosition][second.jPosition]->resetTileColorToDefualt();
                         second.choosenJewel = nullptr;
                     }
                     else if (first.iPosition != i || first.jPosition != j)
                     {
-                        first.choosenTile->resetTileColorToDefualt();
                         first.choosenJewel = gameBoard.getListOfJewels()[i][j];
                         first.iPosition = i;
                         first.jPosition = j;
                         first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                        first.choosenTile->setTileColor(sf::Color(255, 69, 0));
                     }
                 }
                 }

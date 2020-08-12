@@ -6,16 +6,14 @@
 class Tile
 {
 public:
-    Tile(float, float, sf::Color, sf::Color);
+    Tile();
     void setTilePosition(float, float);
-    void render(sf::RenderWindow &);
     bool isTileSelected(sf::Vector2f);
-    void setTileColor(sf::Color);
-    void resetTileColorToDefualt();
+    void render(sf::RenderWindow &);
 
 private:
-    sf::RectangleShape tileShape;
-    sf::Color tileColor;
+    sf::Sprite tileSprite;
+    sf::Texture tileTexture;
 };
 
 #endif
