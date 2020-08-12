@@ -11,9 +11,9 @@ Score::Score(us requiredScore, us currentScore) : requiredScore(requiredScore), 
     this->scoreTextFont.loadFromFile(FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"));
     this->scoreText.setFont(scoreTextFont);
     this->scoreText.setCharacterSize(20);
-    this->scoreText.setOutlineThickness(1);
-    this->scoreText.setOutlineColor(sf::Color::Yellow);
-    this->scoreText.setFillColor(sf::Color::Blue);
+    this->scoreText.setOutlineThickness(1.5);
+    this->scoreText.setOutlineColor(sf::Color::Blue);
+    this->scoreText.setFillColor(sf::Color::White);
 }
 
 void Score::setScoreProgressBarPosition(float x, float y)
