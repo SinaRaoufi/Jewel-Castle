@@ -123,7 +123,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                         second.jPosition = j;
                         if (gameMove.isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
                         {
-                            gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition);
+                            gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition,window);
                             scorePair p = gameBoard.refreshBoard();
                             for (const auto &item : p)
                             {

@@ -211,10 +211,53 @@ void Board::validateJewels()
             }
 }
 
-void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2)
+void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2, sf::RenderWindow &window)
 {
-    listOfJewels[i1][j1]->setJewelPosition(j2, i2);
-    listOfJewels[i2][j2]->setJewelPosition(j1, i1);
+
+    sf::Time time = sf::microseconds(2);
+    sf::Clock clock;
+    size_t i = 0;
+    while (i < 2)
+    {
+        while (clock.getElapsedTime().asMicroseconds() < time.asMicroseconds())
+        {
+            if (clock.getElapsedTime().asMicroseconds() >= time.asMicroseconds())
+            {
+                if (i1 == i2)
+                {
+                    if (j1 > j2)
+                    {
+                        listOfJewels[i1][j1]->moveJewel(-22.5, 0);
+                        listOfJewels[i2][j2]->moveJewel(22.5, 0);
+                    }
+                    else
+                    {
+                        listOfJewels[i1][j1]->moveJewel(22.5, 0);
+                        listOfJewels[i2][j2]->moveJewel(-22.5, 0);
+                    }
+                }
+                else
+                {
+                    if (i1 < i2)
+                    {
+                        listOfJewels[i1][j1]->moveJewel(0, 22.5);
+                        listOfJewels[i2][j2]->moveJewel(0, -22.5);
+                    }
+                    else
+                    {
+                        listOfJewels[i1][j1]->moveJewel(0, -22.5);
+                        listOfJewels[i2][j2]->moveJewel(0, 22.5);
+                    }
+                }
+
+                listOfJewels[i1][j1]->render(window);
+                listOfJewels[i2][j2]->render(window);
+                window.display();
+                i++;
+            }
+        }
+        clock.restart();
+    }
     swap(listOfJewels[i1][j1], listOfJewels[i2][j2]);
 }
 

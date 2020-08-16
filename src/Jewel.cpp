@@ -21,6 +21,11 @@ void Jewel::setJewelPosition(float x, float y)
     this->jewelSprite.setPosition(x * TILE_WIDTH + 150, TILE_HEIGHT * y + 150);
 }
 
+void Jewel::moveJewel(float x, float y)
+{
+    this->jewelSprite.move(sf::Vector2f(x, y));
+}
+
 bool Jewel::operator==(const Jewel &secondJewel)
 {
     return this->score == secondJewel.score;

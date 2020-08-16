@@ -26,7 +26,7 @@ public:
     // void generateRandomJewels(Jewel *);
     Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);
-    void swapTwoJewels(size_t, size_t, size_t, size_t);
+    void swapTwoJewels(size_t, size_t, size_t, size_t, sf::RenderWindow &);
     scorePair refreshBoard();
     unsigned int removeRow(size_t);
     unsigned int removeRectangle(size_t, size_t);
@@ -38,7 +38,7 @@ private:
     TileList listOfTiles;
     JewelList listOfJewels;
     bool isJewelsCombinationValid() const; // utility member function for check jewels combination
-    void validateJewels(); // utility member function for validating jewels combination
+    void validateJewels();                 // utility member function for validating jewels combination
 };
 
 #endif
