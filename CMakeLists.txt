@@ -29,4 +29,4 @@ add_executable(JewelCastle
     src/MagnetAbility.cpp
     src/FistAbility.cpp
     src/BombAbility.cpp)
-    target_link_libraries(JewelCastle sfml-window sfml-system sfml-graphics)
+    target_link_libraries(JewelCastle sfml-window sfml-system sfml-graphics sfml-audio)
