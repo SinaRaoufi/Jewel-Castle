@@ -58,11 +58,11 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)
         {
-            if (this->pauseButton.isButtonPressed(sf::Vector2f(event.mouseButton.x,event.mouseButton.y)))
+            if (this->pauseButton.isButtonPressed(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
             {
                 return state[PAUSE];
             }
-            
+
             // checks whether the ability is selected or not
             for (size_t i = MAGNET; i < NUM_OF_ABILITIES; i++)
                 if (abilities[i]->isAbilityActive())
@@ -73,88 +73,94 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
             for (size_t i = 0; i < gameBoard.getNumberOfRow(); i++)
                 for (size_t j = 0; j < gameBoard.getNumberOfColumn(); j++)
                 {
-                if (gameBoard.getListOfTiles()[i][j]->isTileSelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-                {
-                    if (abilityState != NONE)
+                    if (gameBoard.getListOfTiles()[i][j]->isTileSelected(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                     {
-                        unsigned int score;
-                        switch (abilityState)
+                        if (abilityState != NONE)
                         {
-                        case MAGNET:
-                        {
-                            score = gameBoard.removeRow(i);
-                            abilities[MAGNET]->inactivateAbility();
-                            gameScore.increaseScore(score + 100);
-                            break;
-                        }
-                        case FIST:
-                        {
-                            score = gameBoard.removeRectangle(i, j);
-                            abilities[FIST]->inactivateAbility();
-                            gameScore.increaseScore(score + 150);
-                            break;
-                        }
-                        case BOMB:
-                            score = gameBoard.removeThreeRowColumn(i, j);
-                            abilities[BOMB]->inactivateAbility();
-                            gameScore.increaseScore(score + 200);
-                            break;
-                        }
-                        abilityState = NONE;
-                        break;
-                    }
-
-                    if (first.choosenJewel == nullptr)
-                    {
-                        first.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                        first.iPosition = i;
-                        first.jPosition = j;
-                        first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                        break;
-                    }
-                    else if (first.iPosition == i && first.jPosition - 1 == j ||
-                             first.iPosition == i && first.jPosition + 1 == j ||
-                             first.iPosition + 1 == i && first.jPosition == j ||
-                             first.iPosition - 1 == i && first.jPosition == j)
-                    {
-                        second.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                        second.choosenTile = gameBoard.getListOfTiles()[i][j];
-                        second.iPosition = i;
-                        second.jPosition = j;
-                        if (gameMove.isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
-                        {
-                            gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition,window);
-                            scorePair p = gameBoard.refreshBoard();
-                            for (const auto &item : p)
+                            unsigned int score;
+                            switch (abilityState)
                             {
-                                cout << item.first << ' ' << item.second << endl;
-                                gameScore.increaseScore(item.first * item.second);
-                                switch (item.first)
-                                {
-                                case 4:
-                                    abilities[MAGNET]->activateAbility();
-                                    break;
-                                case 5:
-                                    abilities[FIST]->activateAbility();
-                                    break;
-                                case 6:
-                                    abilities[BOMB]->activateAbility();
-                                    break;
-                                }
+                            case MAGNET:
+                            {
+                                score = gameBoard.removeRow(i);
+                                abilities[MAGNET]->inactivateAbility();
+                                gameScore.increaseScore(score + 100);
+                                break;
                             }
-                            cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
+                            case FIST:
+                            {
+                                score = gameBoard.removeRectangle(i, j);
+                                abilities[FIST]->inactivateAbility();
+                                gameScore.increaseScore(score + 150);
+                                break;
+                            }
+                            case BOMB:
+                                score = gameBoard.removeThreeRowColumn(i, j);
+                                abilities[BOMB]->inactivateAbility();
+                                gameScore.increaseScore(score + 200);
+                                break;
+                            }
+                            abilityState = NONE;
+                            break;
                         }
-                        first.choosenJewel = nullptr;
-                        second.choosenJewel = nullptr;
+
+                        if (first.choosenJewel == nullptr)
+                        {
+                            first.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            first.iPosition = i;
+                            first.jPosition = j;
+                            first.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            first.choosenTile->enableTileOutline();
+                            break;
+                        }
+                        else if (first.iPosition == i && first.jPosition - 1 == j ||
+                                 first.iPosition == i && first.jPosition + 1 == j ||
+                                 first.iPosition + 1 == i && first.jPosition == j ||
+                                 first.iPosition - 1 == i && first.jPosition == j)
+                        {
+                            second.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            second.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            second.iPosition = i;
+                            second.jPosition = j;
+                            second.choosenTile->enableTileOutline();
+                            if (gameMove.isMoveValid(gameBoard, first.iPosition, first.jPosition, second.iPosition, second.jPosition))
+                            {
+                                gameBoard.swapTwoJewels(first.iPosition, first.jPosition, second.iPosition, second.jPosition, window);
+                                scorePair p = gameBoard.refreshBoard();
+                                for (const auto &item : p)
+                                {
+                                    cout << item.first << ' ' << item.second << endl;
+                                    gameScore.increaseScore(item.first * item.second);
+                                    switch (item.first)
+                                    {
+                                    case 4:
+                                        abilities[MAGNET]->activateAbility();
+                                        break;
+                                    case 5:
+                                        abilities[FIST]->activateAbility();
+                                        break;
+                                    case 6:
+                                        abilities[BOMB]->activateAbility();
+                                        break;
+                                    }
+                                }
+                                cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
+                            }
+                            first.choosenTile->disableTileOutline();
+                            first.choosenJewel = nullptr;
+                            second.choosenTile->disableTileOutline();
+                            second.choosenJewel = nullptr;
+                        }
+                        else if (first.iPosition != i || first.jPosition != j)
+                        {
+                            first.choosenTile->disableTileOutline();
+                            first.choosenJewel = gameBoard.getListOfJewels()[i][j];
+                            first.iPosition = i;
+                            first.jPosition = j;
+                            first.choosenTile = gameBoard.getListOfTiles()[i][j];
+                            first.choosenTile->enableTileOutline();
+                        }
                     }
-                    else if (first.iPosition != i || first.jPosition != j)
-                    {
-                        first.choosenJewel = gameBoard.getListOfJewels()[i][j];
-                        first.iPosition = i;
-                        first.jPosition = j;
-                        first.choosenTile = gameBoard.getListOfTiles()[i][j];
-                    }
-                }
                 }
         }
     return this;
@@ -163,7 +169,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
 GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
 {
     gameTimer.updateTime();
-    if(gameScore.getCurrentScore() >=gameScore.getRequiredScore())
+    if (gameScore.getCurrentScore() >= gameScore.getRequiredScore())
         return state[WIN];
     return this;
 }
