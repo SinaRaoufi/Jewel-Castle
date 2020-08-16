@@ -2,6 +2,7 @@
 #include "States/PauseState.hpp"
 #include "States/MainMenuState.hpp"
 #include "States/WinState.hpp"
+#include "States/LostState.hpp"
 
 Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE,sf::Style::Close), currentState(nullptr)
 {
@@ -16,6 +17,7 @@ void Game::init()
     statesList[MAINMENU] = new MainMenuState();
     statesList[PAUSE] = new PauseState();
     statesList[WIN] = new WinState();
+    statesList[LOST] = new LostState();
     currentState = statesList[MAINMENU];
     run();
 }
