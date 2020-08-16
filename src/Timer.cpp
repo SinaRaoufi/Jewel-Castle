@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Timer::Timer(int countDown): countDown(sf::seconds(countDown))
+Timer::Timer(int countDown) : countDown(sf::seconds(countDown))
 {
     this->timerTexture.loadFromFile(PROGRESS_BAR_TEXTURE_DIRECTORY + string("timer_progress_bar.png"));
     this->timerTexture.setSmooth(true);
@@ -24,6 +24,11 @@ void Timer::updateTime()
         this->countDown -= sf::seconds(1);
         this->clock.restart();
     }
+}
+
+int Timer::getCountDownTime() const
+{
+    return this->countDown.asSeconds();
 }
 
 void Timer::setTimerProgressBarPosition(float x, float y)

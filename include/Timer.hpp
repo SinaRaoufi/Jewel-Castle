@@ -8,6 +8,7 @@ class Timer
 public:
     explicit Timer(int);
     void updateTime();
+    int getCountDownTime() const;
     void setTimerProgressBarPosition(float, float);
     void render(sf::RenderWindow &);
 

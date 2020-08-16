@@ -169,6 +169,8 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
 GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
 {
     gameTimer.updateTime();
+    if (gameTimer.getCountDownTime() < 0)
+        return state[LOST];
     if (gameScore.getCurrentScore() >= gameScore.getRequiredScore())
         return state[WIN];
     return this;
