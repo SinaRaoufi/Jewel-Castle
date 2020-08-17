@@ -7,14 +7,19 @@
 class Move
 {
 public:
+    explicit Move(unsigned int);
     bool isMoveValid(const Board &, size_t, size_t, size_t, size_t) const;
-    // void render(sf::RenderWindow &);
+    unsigned int getNumberOfMove() const;
+    void decreaseNumberOfMoveByOne();
+    void setMoveProgressBarPosition(float, float);
+    void render(sf::RenderWindow &);
 
 private:
-    // sf::Sprite moveSprite;
-    // sf::Texture moveTexture;
-    // sf::Font moveFont;
-    // sf::Text moveText;
+    unsigned int numberOfMove;
+    sf::Sprite moveSprite;
+    sf::Texture moveTexture;
+    sf::Font moveFont;
+    sf::Text moveText;
     bool checkVerticalMove(const Board &, size_t, size_t, size_t, size_t) const;
     bool checkHorizontalMove(const Board &, size_t, size_t, size_t, size_t) const;
 };

@@ -1,5 +1,19 @@
 #include "Move.hpp"
 
+using namespace std;
+
+Move::Move(unsigned int numOfMove) : numberOfMove(numOfMove)
+{
+    this->moveTexture.loadFromFile(PROGRESS_BAR_TEXTURE_DIRECTORY + string("move_progress_bar.png"));
+    this->moveSprite.setTexture(this->moveTexture);
+    this->moveFont.loadFromFile(FONT_DIRECTORY + string("Xerox Sans Serif Narrow Bold.ttf"));
+    this->moveText.setFont(this->moveFont);
+    this->moveText.setCharacterSize(30);
+    this->moveText.setOutlineThickness(1.5);
+    this->moveText.setOutlineColor(sf::Color::Blue);
+    this->moveText.setFillColor(sf::Color::White);
+}
+
 // Check vertical move
 bool Move::checkVerticalMove(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2) const
 {
@@ -102,4 +116,29 @@ bool Move::isMoveValid(const Board &gameBoard, size_t i1, size_t j1, size_t i2, 
     // Check horizantal move
     if (i1 == i2)
         return checkHorizontalMove(gameBoard, i1, j1, i2, j2);
+}
+
+unsigned int Move::getNumberOfMove() const
+{
+    return this->numberOfMove;
+}
+
+void Move::decreaseNumberOfMoveByOne()
+{
+    this->numberOfMove--;
+}
+
+// Set position of move progress bar (contain number of move)
+void Move::setMoveProgressBarPosition(float x, float y)
+{
+    this->moveSprite.setPosition(sf::Vector2f(x, y));
+    this->moveText.setPosition(x + 17, y + 12);
+}
+
+// Show number of move
+void Move::render(sf::RenderWindow &window)
+{
+    this->moveText.setString(to_string(this->numberOfMove));
+    window.draw(this->moveSprite);
+    window.draw(this->moveText);
 }

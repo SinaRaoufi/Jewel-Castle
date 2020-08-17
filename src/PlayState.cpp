@@ -28,7 +28,7 @@ enum abilityStates
 
 short int abilityState = NONE;
 
-PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN),
+PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN), gameMove(NUM_OF_MOVE),
                          pauseButton(BUTTON_TEXTURE_DIRECTORY + string("pause_button.png"))
 {
     // initialize each elements to nullptr
@@ -45,6 +45,7 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN),
     abilities[BOMB]->setPosition(385, 90);
     gameScore.setScoreProgressBarPosition(530, 0);
     gameTimer.setTimerProgressBarPosition(560, 70);
+    gameMove.setMoveProgressBarPosition(628, 142);
 }
 
 PlayState::~PlayState()
@@ -145,6 +146,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                     }
                                 }
                                 cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
+                                gameMove.decreaseNumberOfMoveByOne();
                             }
                             first.choosenTile->disableTileOutline();
                             first.choosenJewel = nullptr;
@@ -185,4 +187,5 @@ void PlayState::render(sf::RenderWindow &window)
         ability->render(window);
     gameTimer.render(window);
     pauseButton.render(window);
+    gameMove.render(window);
 }
