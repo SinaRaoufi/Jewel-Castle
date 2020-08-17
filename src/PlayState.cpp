@@ -130,7 +130,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                 scorePair p = gameBoard.refreshBoard();
                                 for (const auto &item : p)
                                 {
-                                    cout << item.first << ' ' << item.second << endl;
                                     gameScore.increaseScore(item.first * item.second);
                                     switch (item.first)
                                     {
@@ -145,7 +144,6 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
                                         break;
                                     }
                                 }
-                                cout << gameScore.getCurrentScore() << '/' << gameScore.getRequiredScore() << endl;
                                 gameMove.decreaseNumberOfMoveByOne();
                             }
                             first.choosenTile->disableTileOutline();

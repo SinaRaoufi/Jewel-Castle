@@ -7,7 +7,7 @@ using namespace std;
 LostState::LostState() : restartButton(BUTTON_TEXTURE_DIRECTORY + string("restart_circle_button.png")),
                          mainmenuButton(BUTTON_TEXTURE_DIRECTORY + string("mainmenu_circle_button.png"))
 {
-    backgroundPath = "win_background.jpg";
+    backgroundPath = "lost_background.jpg";
     setBackground();
     this->restartButton.setButtonPosition(255, 350);
     this->mainmenuButton.setButtonPosition(355, 354);
