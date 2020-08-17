@@ -20,8 +20,8 @@ private:
     sf::Texture moveTexture;
     sf::Font moveFont;
     sf::Text moveText;
-    bool checkVerticalMove(const Board &, size_t, size_t, size_t, size_t) const;
-    bool checkHorizontalMove(const Board &, size_t, size_t, size_t, size_t) const;
+    bool checkVerticalMove(const Board &, int, int, int, int) const;
+    bool checkHorizontalMove(const Board &, int, int, int, int) const;
 };
 
 #endif
