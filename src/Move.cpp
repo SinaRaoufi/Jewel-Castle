@@ -160,7 +160,7 @@ void Move::decreaseNumberOfMoveByOne()
 void Move::setMoveProgressBarPosition(float x, float y)
 {
     this->moveSprite.setPosition(sf::Vector2f(x, y));
-    this->moveText.setPosition(x + 17, y + 12);
+    this->moveText.setPosition(x + 19, y + 12);
 }
 
 // Show number of move
