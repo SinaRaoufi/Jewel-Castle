@@ -82,39 +82,6 @@ JewelList Board::getListOfJewels() const
     return listOfJewels;
 }
 
-// void Board::generateRandomJewels(Jewel *jewel)
-// {
-//     cout << "Done !" << endl;
-//     if (jewel != nullptr)
-//     {
-//         // cout << "In" << endl;
-//         delete jewel;
-//     }
-//     cout << "Done !" << endl;
-
-//     switch (generateRandomNumber(YELLOW_JEWEL, VIOLET_JEWEL))
-//     {
-//     case YELLOW_JEWEL:
-//         jewel = new YellowJewel();
-//         break;
-//     case GREEN_JEWEL:
-//         jewel = new GreenJewel();
-//         break;
-//     case RED_JEWEL:
-//         jewel = new RedJewel();
-//         break;
-//     case BLUE_JEWEL:
-//         jewel = new BlueJewel();
-//         break;
-//     case PINK_JEWEL:
-//         jewel = new PinkJewel();
-//         break;
-//     case VIOLET_JEWEL:
-//         jewel = new VioletJewel();
-//         break;
-//     }
-// }
-
 // generate one jewel and return it
 Jewel *Board::generateRandomJewel()
 {
@@ -335,16 +302,17 @@ scorePair Board::refreshBoard()
     return p;
 }
 
-unsigned int Board::removeRow(size_t i)
+unsigned int Board::removeRow(size_t rowIndex)
 {
-    scorePair p;
+    scorePair result;
     unsigned int score = 0;
     for (size_t j = 0; j < numberOfColumn; j++)
     {
-        score += listOfJewels[i][j]->getJewelScore();
-        delete listOfJewels[i][j];
-        if (i != 0)
-            for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
+        score += listOfJewels[rowIndex][j]->getJewelScore();
+        delete listOfJewels[rowIndex][j];
+        // could be a single function (Use DRY principle)
+        if (rowIndex != 0)
+            for (int f = rowIndex - 1; f != -1; f--) 
             {
                 listOfJewels[f + 1][j] = listOfJewels[f][j];
                 listOfJewels[f + 1][j]->setJewelPosition(j, (f + 1));
@@ -354,37 +322,33 @@ unsigned int Board::removeRow(size_t i)
     }
     while (!isJewelsCombinationValid())
     {
-        p = refreshBoard();
-        for (const auto &item : p)
+        result = refreshBoard();
+        for (const auto &item : result)
             score += item.second;
     }
     return score;
 }
 
-unsigned int Board::removeRectangle(size_t i, size_t j)
+unsigned int Board::removeRectangle(size_t rowIndex, size_t columnIndex)
 {
-    scorePair p;
+    scorePair result;
     unsigned int score = 0;
-    if (i - 4 < 0)
-        i = 0;
-    else if (i + 4 > numberOfRow)
-        i = 5;
-    if (j - 4 < 0)
-        j = 0;
-    else if (j + 4 > numberOfColumn)
-        j = 5;
-    for (size_t k = i; k < i + 4; k++)
-        for (size_t f = j; f < j + 4; f++)
+    if (rowIndex + 4 > numberOfRow)
+        rowIndex = 5;
+    if (columnIndex + 4 > numberOfColumn)
+        columnIndex = 5;
+    for (size_t i = rowIndex; i < rowIndex + 4; i++)
+        for (size_t j = columnIndex; j < columnIndex + 4; j++)
         {
-            score += listOfJewels[k][f]->getJewelScore();
-            delete listOfJewels[k][f];
-            listOfJewels[k][f] = generateRandomJewel();
-            listOfJewels[k][f]->setJewelPosition(f, k);
+            score += listOfJewels[i][j]->getJewelScore();
+            delete listOfJewels[i][j];
+            listOfJewels[i][j] = generateRandomJewel();
+            listOfJewels[i][j]->setJewelPosition(j, i);
         }
     while (!isJewelsCombinationValid())
     {
-        p = refreshBoard();
-        for (const auto &item : p)
+        result = refreshBoard();
+        for (const auto &item : result)
             score += item.second;
     }
     return score;
@@ -393,7 +357,7 @@ unsigned int Board::removeRectangle(size_t i, size_t j)
 unsigned int Board::removeThreeRowColumn(size_t rowIndex, size_t columnIndex)
 {
     unsigned int score = 0;
-    scorePair p;
+    scorePair result;
     if (rowIndex > 6)
         rowIndex = 6;
     if (columnIndex > 6)
@@ -421,8 +385,8 @@ unsigned int Board::removeThreeRowColumn(size_t rowIndex, size_t columnIndex)
         }
     while (!isJewelsCombinationValid())
     {
-        p = refreshBoard();
-        for (const auto &item : p)
+        result = refreshBoard();
+        for (const auto &item : result)
             score += item.second;
     }
     return score;

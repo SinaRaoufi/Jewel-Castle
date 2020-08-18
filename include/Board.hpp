@@ -23,7 +23,6 @@ public:
     TileList getListOfTiles() const;
     JewelList getListOfJewels() const;
     void shuffleJewels(JewelList &);
-    // void generateRandomJewels(Jewel *);
     Jewel *generateRandomJewel();
     void render(sf::RenderWindow &);
     void swapTwoJewels(size_t, size_t, size_t, size_t, sf::RenderWindow &);
