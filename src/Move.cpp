@@ -17,46 +17,76 @@ Move::Move(unsigned int numOfMove) : numberOfMove(numOfMove)
 // Check vertical move
 bool Move::checkVerticalMove(const Board &gameBoard, int i1, int j1, int i2, int j2) const
 {
-    if (j2 != 0 || j2 != NUM_OF_COLUMN - 1)
+    if (j2 - 1 >= 0 && j2 + 1 < NUM_OF_ROW)
         if (*gameBoard.getListOfJewels()[i2][j2 - 1] == *gameBoard.getListOfJewels()[i1][j1] &&
             *gameBoard.getListOfJewels()[i2][j2 + 1] == *gameBoard.getListOfJewels()[i1][j1])
+        {
+            cout << 1 << endl;
             return true;
-    if (j2 != NUM_OF_COLUMN - 1)
-        if (*gameBoard.getListOfJewels()[i2][j2 + 1] == *gameBoard.getListOfJewels()[i1][j1] &&
-            *gameBoard.getListOfJewels()[i2][j2 + 2] == *gameBoard.getListOfJewels()[i1][j1])
-            return true;
-    if (j2 != 0)
-        if (*gameBoard.getListOfJewels()[i2][j2 - 1] == *gameBoard.getListOfJewels()[i1][j1] &&
-            *gameBoard.getListOfJewels()[i2][j2 - 2] == *gameBoard.getListOfJewels()[i1][j1])
-            return true;
-    if (j1 != 0 || j1 != NUM_OF_COLUMN - 1)
+        }
+    if (j1 - 1 >= 0 && j1 + 1 < NUM_OF_ROW)
         if (*gameBoard.getListOfJewels()[i1][j1 - 1] == *gameBoard.getListOfJewels()[i2][j2] &&
             *gameBoard.getListOfJewels()[i1][j1 + 1] == *gameBoard.getListOfJewels()[i2][j2])
+        {
+            cout << 2 << endl;
             return true;
-    if (j1 != NUM_OF_COLUMN - 1)
+        }
+    if (j2 + 2 < NUM_OF_COLUMN)
+        if (*gameBoard.getListOfJewels()[i2][j2 + 1] == *gameBoard.getListOfJewels()[i1][j1] &&
+            *gameBoard.getListOfJewels()[i2][j2 + 2] == *gameBoard.getListOfJewels()[i1][j1])
+        {
+            cout << 3 << endl;
+            return true;
+        }
+    if (j1 + 2 < NUM_OF_COLUMN)
         if (*gameBoard.getListOfJewels()[i1][j1 + 1] == *gameBoard.getListOfJewels()[i2][j2] &&
             *gameBoard.getListOfJewels()[i1][j1 + 2] == *gameBoard.getListOfJewels()[i2][j2])
+        {
+            cout << 4 << endl;
             return true;
-    if (j1 != 0)
+        }
+    if (j2 - 2 >= 0)
+        if (*gameBoard.getListOfJewels()[i2][j2 - 1] == *gameBoard.getListOfJewels()[i1][j1] &&
+            *gameBoard.getListOfJewels()[i2][j2 - 2] == *gameBoard.getListOfJewels()[i1][j1])
+        {
+            cout << 5 << endl;
+            return true;
+        }
+    if (j1 - 2 >= 0)
         if (*gameBoard.getListOfJewels()[i1][j1 - 1] == *gameBoard.getListOfJewels()[i2][j2] &&
             *gameBoard.getListOfJewels()[i1][j1 - 2] == *gameBoard.getListOfJewels()[i2][j2])
+        {
+            cout << 6 << endl;
             return true;
-    if (i2 != 0)
-        if (*gameBoard.getListOfJewels()[i2 - 1][j2] == *gameBoard.getListOfJewels()[i1][j1] &&
-            *gameBoard.getListOfJewels()[i2 - 2][j2] == *gameBoard.getListOfJewels()[i1][j1])
+        }
+    if (i1 - 3 >= 0 && i1 > i2)
+        if (*gameBoard.getListOfJewels()[i1 - 2][j1] == *gameBoard.getListOfJewels()[i1][j1] &&
+            *gameBoard.getListOfJewels()[i1 - 3][j1] == *gameBoard.getListOfJewels()[i1][j1])
+        {
+            cout << 7 << endl;
             return true;
-    if (i1 != 0)
-        if (*gameBoard.getListOfJewels()[i1 - 1][j1] == *gameBoard.getListOfJewels()[i2][j2] &&
-            *gameBoard.getListOfJewels()[i1 - 2][j1] == *gameBoard.getListOfJewels()[i2][j2])
+        }
+    if (i2 - 3 >= 0 && i2 > i1)
+        if (*gameBoard.getListOfJewels()[i2 - 2][j2] == *gameBoard.getListOfJewels()[i2][j2] &&
+            *gameBoard.getListOfJewels()[i2 - 3][j2] == *gameBoard.getListOfJewels()[i2][j2])
+        {
+            cout << 8 << endl;
             return true;
-    if (i2 != NUM_OF_ROW)
-        if (*gameBoard.getListOfJewels()[i2 + 1][j2] == *gameBoard.getListOfJewels()[i1][j1] &&
-            *gameBoard.getListOfJewels()[i2 + 2][j2] == *gameBoard.getListOfJewels()[i1][j1])
+        }
+    if (i1 + 3 < NUM_OF_ROW && i1 < i2)
+        if (*gameBoard.getListOfJewels()[i1 + 2][j1] == *gameBoard.getListOfJewels()[i1][j1] &&
+            *gameBoard.getListOfJewels()[i1 + 3][j1] == *gameBoard.getListOfJewels()[i1][j1])
+        {
+            cout << 9 << endl;
             return true;
-    if (i1 != NUM_OF_ROW)
-        if (*gameBoard.getListOfJewels()[i1 + 1][j1] == *gameBoard.getListOfJewels()[i2][j2] &&
-            *gameBoard.getListOfJewels()[i1 + 2][j1] == *gameBoard.getListOfJewels()[i2][j2])
+        }
+    if (i2 + 3 < NUM_OF_ROW && i2 < i1)
+        if (*gameBoard.getListOfJewels()[i2 + 2][j2] == *gameBoard.getListOfJewels()[i2][j2] &&
+            *gameBoard.getListOfJewels()[i2 + 3][j2] == *gameBoard.getListOfJewels()[i2][j2])
+        {
+            cout << 10 << endl;
             return true;
+        }
     return false;
 }
 
@@ -108,17 +138,6 @@ bool Move::checkHorizontalMove(const Board &gameBoard, int i1, int j1, int i2, i
 
 bool Move::isMoveValid(const Board &gameBoard, size_t i1, size_t j1, size_t i2, size_t j2) const
 {
-    // cout << "====================================" << endl;
-    // for (auto &row : gameBoard.getListOfJewels())
-    // {
-    //     for (auto &item : row)
-    //     {
-    //         cout << item->getJewelScore() << " ";
-    //     }
-    //     cout << endl;
-    // }
-    // cout << "====================================" << endl;
-
     // Check vertical move
     if (j1 == j2)
         return checkVerticalMove(gameBoard, i1, j1, i2, j2);
