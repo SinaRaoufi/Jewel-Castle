@@ -6,14 +6,19 @@
 
 Game::Game() : mainWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE, sf::Style::Close), currentState(nullptr)
 {
+    // centralized the game window
+    this->mainWindow.setPosition(sf::Vector2i(sf::VideoMode::getDesktopMode().width / 2 - mainWindow.getSize().x / 2,
+                                              sf::VideoMode::getDesktopMode().height / 2 - mainWindow.getSize().y / 2));
     this->mainWindow.requestFocus();
+    // initialized each states to nullptr
     for (size_t i = 0; i < NUMBER_OF_STATES; i++)
         statesList[i] = nullptr;
 }
 
-// initialize the game
+// initialized the game
 void Game::init()
 {
+    // creates each game state that we need in the game (except PlayState)
     statesList[MAINMENU] = new MainMenuState();
     statesList[PAUSE] = new PauseState();
     statesList[WIN] = new WinState();
