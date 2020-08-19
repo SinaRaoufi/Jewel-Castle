@@ -5,6 +5,14 @@
 #include <string>
 #include "configs.hpp"
 
+enum abilityStates
+{
+    NONE = -1,
+    MAGNET,
+    FIST,
+    BOMB
+};
+
 class Ability
 {
 public:

@@ -18,14 +18,6 @@ struct ChoosenEntity
 struct ChoosenEntity first;
 struct ChoosenEntity second;
 
-enum abilityStates
-{
-    NONE = -1,
-    MAGNET,
-    FIST,
-    BOMB
-};
-
 short int abilityState = NONE;
 
 PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN), gameMove(NUM_OF_MOVE),

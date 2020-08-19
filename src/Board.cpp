@@ -231,7 +231,7 @@ void Board::swapTwoJewels(size_t i1, size_t j1, size_t i2, size_t j2, sf::Render
 scorePair Board::refreshBoard()
 {
     us numberOfDeletedJewel = 0;
-    scorePair p;
+    scorePair result;
     while (!isJewelsCombinationValid())
     {
         // Refresh game board horizontaly
@@ -250,7 +250,7 @@ scorePair Board::refreshBoard()
                                 break;
                             delete listOfJewels[i][k];
                             if (i != 0)
-                                for (int f = i - 1; f != -1; f--) // could be a single function (Use DRY principle)
+                                for (int f = i - 1; f != -1; f--)
                                 {
                                     listOfJewels[f + 1][k] = listOfJewels[f][k];
                                     listOfJewels[f + 1][k]->setJewelPosition(k, (f + 1));
@@ -265,7 +265,7 @@ scorePair Board::refreshBoard()
                             k++;
                             numberOfDeletedJewel++;
                         }
-                        p.push_back(make_pair(numberOfDeletedJewel, jewelScore));
+                        result.push_back(make_pair(numberOfDeletedJewel, jewelScore));
                         numberOfDeletedJewel = 0;
                     }
             }
@@ -294,12 +294,12 @@ scorePair Board::refreshBoard()
                             listOfJewels[0][j]->setJewelPosition(j, 0);
                             numberOfDeletedJewel++;
                         }
-                        p.push_back(make_pair(numberOfDeletedJewel, jewelScore));
+                        result.push_back(make_pair(numberOfDeletedJewel, jewelScore));
                         numberOfDeletedJewel = 0;
                     }
             }
     }
-    return p;
+    return result;
 }
 
 unsigned int Board::removeRow(size_t rowIndex)
@@ -310,7 +310,6 @@ unsigned int Board::removeRow(size_t rowIndex)
     {
         score += listOfJewels[rowIndex][j]->getJewelScore();
         delete listOfJewels[rowIndex][j];
-        // could be a single function (Use DRY principle)
         if (rowIndex != 0)
             for (int f = rowIndex - 1; f != -1; f--) 
             {
@@ -366,7 +365,7 @@ unsigned int Board::removeThreeRowColumn(size_t rowIndex, size_t columnIndex)
         for (size_t i = 0; i < numberOfRow; i++)
         {
             score += listOfJewels[i][j]->getJewelScore();
-            delete listOfJewels[i][j]; // line 350 , 351 could be one function
+            delete listOfJewels[i][j];
             listOfJewels[i][j] = generateRandomJewel();
             listOfJewels[i][j]->setJewelPosition(j, i);
         }
