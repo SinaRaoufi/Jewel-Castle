@@ -5,6 +5,10 @@
 #include "Abilities/BombAbility.hpp"
 
 #include <iostream>
+#include <fstream>
+#include <unistd.h>
+#include <pwd.h>
+
 using namespace std;
 
 struct ChoosenEntity
@@ -161,9 +165,15 @@ GameState *PlayState::update(sf::RenderWindow &window, StateList &state)
 {
     gameTimer.updateTime();
     if (gameTimer.getCountDownTime() < 0)
+    {
+        saveGameInformations();
         return state[LOST];
+    }
     if (gameScore.getCurrentScore() >= gameScore.getRequiredScore())
+    {
+        saveGameInformations();
         return state[WIN];
+    }
     return this;
 }
 
@@ -177,4 +187,13 @@ void PlayState::render(sf::RenderWindow &window)
     gameTimer.render(window);
     pauseButton.render(window);
     gameMove.render(window);
+}
+
+void PlayState::saveGameInformations() const
+{
+    ofstream file;
+    file.open(DATA_DIRECTORY + string("game_data.txt"), ios::app);
+    file << getpwuid(getuid())->pw_name << endl;
+    file << gameScore.getCurrentScore() << endl;
+    file.close();
 }

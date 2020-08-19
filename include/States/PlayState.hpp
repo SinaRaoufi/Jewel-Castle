@@ -25,6 +25,7 @@ private:
     Move gameMove;
     std::array<Ability *, NUM_OF_ABILITIES> abilities;
     Button pauseButton;
+    void saveGameInformations() const;
 };
 
 #endif
