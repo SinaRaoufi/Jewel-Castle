@@ -42,6 +42,7 @@ PlayState::PlayState() : gameScore(REQUIRED_SCORE), gameTimer(TIMER_COUNTDOWN), 
 
 PlayState::~PlayState()
 {
+    // delete each ability that allocated dynamically
     for (auto &ability : abilities)
         delete ability;
 }
@@ -52,9 +53,7 @@ GameState *PlayState::eventHandler(sf::RenderWindow &window, StateList &state, s
         if (event.mouseButton.button == sf::Mouse::Left)
         {
             if (this->pauseButton.isButtonPressed(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-            {
                 return state[PAUSE];
-            }
 
             // checks whether the ability is selected or not
             for (size_t i = MAGNET; i < NUM_OF_ABILITIES; i++)
