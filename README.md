@@ -9,11 +9,11 @@ Match 4 jewels to activate MAGNET ability, 5 jewels to activate FIST ability and
 - C++ Compiler (GCC is recommended)
 
 ```
-cmake .
+cmake . -B build
 ```
 After the MakeFile was created:
 ```
-make
+make -C build
 ```
 # Contributing
 Your contributions are always welcome!
